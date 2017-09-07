@@ -1,0 +1,22 @@
+{
+  "name": "sableyebot",
+  "version": "3.0.0",
+  "description": "Competitive Pokemon discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JsKingBoo",
+  "contributors": [
+    "Ghoulean"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.1.0",
+    "lokijs": "^1.5.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1",
+    "eslint-config-google": "^0.9.1"
+  }
+}
