@@ -35,7 +35,7 @@ class CommandManager {
 						if (name.endsWith('.js')) {
 							try {
 								name = name.slice(0, -3);
-								let command = new Command(name, prefix, require(directory + '\\' + name + '.js'));
+								let command = new Command(name, prefix, require(directory + '/' + name + '.js'));
 								this.commands.push(command);
 							} catch (e) {
 								console.log(`CommandManager loadDirectory() error: ${e} while parsing ${name}.js in ${directory}`);
