@@ -1,4 +1,4 @@
-# ![logo](assets/logo.png "logo") 
+# ![logo](assets/avatar.png "logo") 
 # SableyeBot
 ### Competitive Pokemon Discord bot
 
