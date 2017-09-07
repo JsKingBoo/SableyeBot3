@@ -12,6 +12,7 @@ cm.init()
     meme(cm);
   })
   .catch((e) => {
+    console.log("Error initiating CommandManager!", e);
   });
 
 module.exports = function message(msg) { 
