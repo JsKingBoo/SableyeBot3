@@ -5,6 +5,7 @@ module.exports.admins = [130830896495329280];
 
 module.exports.dexCommandPrefix = "//";
 module.exports.botCommandPrefix = "//";
+module.exports.fcCommandPrefix = "//";
 module.exports.helpCommand = "help";
 module.exports.flagPrefix = "--";
 module.exports.forcePM = 1500;
@@ -16,7 +17,8 @@ module.exports.messageOptions = {
   disableEveryone: true
 };
 
-module.exports.lokidb = './storage.json';
+module.exports.logsData = './storage.json';
+module.exports.fcData = './fc.json';
 module.exports.avatar = 'avatar.png';
 module.exports.defaultPresence = {
   'status': 'online',
