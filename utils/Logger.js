@@ -3,7 +3,7 @@
 const path = require('path');
 const Loki = require('lokijs');
 
-const fullDbPath = path.resolve(__dirname, '../logs/', config.lokidb);
+const fullDbPath = path.resolve(__dirname, '../logs/', config.logsData);
 
 const db = new Loki(fullDbPath, {
   autoload: false,
@@ -40,7 +40,6 @@ class Logger {
       'status': bot.user.presence.status, 
       'game': (bot.user.presence.game ? bot.user.presence.game.name : null)
     });
-    console.log(this.status.data);
     db.saveDatabase();
   }
   

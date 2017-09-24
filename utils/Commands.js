@@ -110,6 +110,21 @@ class BotCommand extends Command {
   }
 }
 
+class FCCommand extends Command {
+  constructor(name, prefix, cmd) {
+    super(name, prefix, cmd);
+    this.commandType = 'FCCommand';
+  }
+  
+  execute(msg = [], flags = this.options, authorId = -1, fcm = null) {
+    if (this.disabled) {
+      return;
+    }
+    return this.process(msg, flags, authorId, fcm);
+  }
+}
+
 module.exports.Command = Command;
 module.exports.DexCommand = DexCommand;
 module.exports.BotCommand = BotCommand;
+module.exports.FCCommand = FCCommand;

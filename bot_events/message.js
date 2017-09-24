@@ -4,7 +4,13 @@ const path = require('path');
 
 const CommandManager = require(path.resolve(__dirname, '../utils/CommandManager.js'));
 const Flag = require(path.resolve(__dirname, '../utils/Flag.js'));
-const meme = require(path.resolve(__dirname, '../utils/meme.js'));
+var meme;
+
+try {
+  meme = require(path.resolve(__dirname, '../utils/meme.js'));
+} catch (e) {
+  meme = () => {};
+}
 
 const cm = new CommandManager();
 cm.init()
@@ -40,7 +46,7 @@ module.exports = function message(msg) {
   }
   msgContent = msgContent.join(" ").slice(cmd.length).split(",");
   
-  let commandOutput = cm.executeCommand(cmd, msgContent, flags, config.admins.includes(parseInt(msg.author.id)));
+  let commandOutput = cm.executeCommand(cmd, msgContent, flags, msg.author.id);
   
   if (!commandOutput) {
     return;

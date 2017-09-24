@@ -6,9 +6,14 @@ const path = require('path');
 const Commands = require('./Commands.js');
 const Dex = require('./dex.js');
 const Flag = require('./Flag.js');
+const FCManager = require('./FCManager.js');
 
 const BOT_CMD_DIR = path.resolve(__dirname, '../commands/bot_commands/');
 const DEX_CMD_DIR = path.resolve(__dirname, '../commands/dex_commands/');
+const FC_CMD_DIR = path.resolve(__dirname, '../commands/fc_commands/');
+
+const fcm = new FCManager();
+fcm.init();
 
 class CommandManager {
   constructor() {
@@ -19,7 +24,8 @@ class CommandManager {
   async init() {
     await Promise.all([
       this.loadDirectory(BOT_CMD_DIR, Commands.BotCommand, config.botCommandPrefix),
-      this.loadDirectory(DEX_CMD_DIR, Commands.DexCommand, config.dexCommandPrefix)
+      this.loadDirectory(DEX_CMD_DIR, Commands.DexCommand, config.dexCommandPrefix),
+      this.loadDirectory(FC_CMD_DIR, Commands.FCCommand, config.fcCommandPrefix),
     ]);
   }
   
@@ -48,8 +54,9 @@ class CommandManager {
 		});
   }
   
-  executeCommand(cmd, msg = [], flags, isAdmin) {
+  executeCommand(cmd, msg = [], flags, authorId) {
     let passDex = Dex;
+    let isAdmin = config.admins.includes(parseInt(authorId));
     
     if (cmd === `${config.dexCommandPrefix}${config.helpCommand}` || cmd === `${config.botCommandPrefix}${config.helpCommand}`) {
       let usedPrefix = cmd.slice(0, -1 * config.helpCommand.length);
@@ -87,7 +94,21 @@ class CommandManager {
           }
         }
         
-        let commandOutput = command.execute(msg, parsedFlags, passDex);
+        let commandOutput;
+        switch (command.commandType) {
+          case 'BotCommand':
+            commandOutput = command.execute(msg, parsedFlags);
+            break;
+          case 'DexCommand':
+            commandOutput = command.execute(msg, parsedFlags, passDex);
+            break;
+          case 'FCCommand':
+            commandOutput = command.execute(msg, parsedFlags, authorId, fcm);
+            break;
+          default:
+            commandOutput = command.execute(msg, parsedFlags);
+        }
+       
         let badOutput = false;
         if (!commandOutput) {
           badOutput = true;
