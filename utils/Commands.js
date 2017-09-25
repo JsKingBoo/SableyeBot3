@@ -99,7 +99,6 @@ class BotCommand extends Command {
   constructor(name, prefix, cmd) {
     super(name, prefix, cmd);
     this.commandType = 'BotCommand';
-    this.adminOnly = cmd.adminOnly || true;
   }
   
   execute(msg = [], flags = this.options) {
