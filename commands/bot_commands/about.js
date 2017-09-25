@@ -5,6 +5,7 @@ module.exports = {
   usage: "",
   aliases: ['sableye', 'version'],
   options: [],
+  adminOnly: false,
   hasCustomFormatting: true,
   process: (msg, flags) => {
     return ({
