@@ -78,12 +78,23 @@ function getPokemonProperty(pokemon, property, dex) {
     return (pokemon.types.length === 1 ? alphanumeric(pokemon.types[0]) : null);
   case 'move': return new Learnset(pokemon, dex).movesArray();
   case 'hp':
+  case 'health':
+    return pokemon.baseStats.hp;
   case 'atk':
+  case 'attack':
+    return pokemon.baseStats.atk;
   case 'def':
+  case 'defense':
+    return pokemon.baseStats.def;
   case 'spa':
+  case 'specialattack':
+    return pokemon.baseStats.spa;
   case 'spd':
+  case 'specialdefense':
+    return pokemon.baseStats.spd;
   case 'spe':
-    return pokemon.baseStats[property];
+  case 'speed':
+    return pokemon.baseStats.spe;
   case 'bst': return pokemon.baseStats.hp + pokemon.baseStats.atk + pokemon.baseStats.def + pokemon.baseStats.spa + pokemon.baseStats.spd + pokemon.baseStats.spe;
   case 'prevo': return pokemon.prevo || null;
   case 'evos': return pokemon.evos;
@@ -99,16 +110,16 @@ function getPokemonProperty(pokemon, property, dex) {
   case 'weight':
     return pokemon.weightkg;
   case 'bmi': return Math.round(pokemon.weightkg/(pokemon.heightm*pokemon.heightm));
-  case 'color': return pokemon.color;
+  case 'color': return pokemon.color.toLowerCase();
   case 'egggroups':
   case 'egggroup':
   case 'egg':
     return pokemon.eggGroups;
-  case 'forme': return pokemon.forme;
-  case 'formeletter': return pokemon.formeLetter;
+  case 'forme': return pokemon.forme.toLowerCase();
+  case 'formeletter': return pokemon.formeLetter.toLowerCase();
   case 'otherformes': return pokemon.otherFormes;
   case 'otherforms': return pokemon.otherForms;
-  case 'tier': return pokemon.tier;
+  case 'tier': return pokemon.tier.toLowerCase();
   default: return null;
   }
 }
