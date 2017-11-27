@@ -58,6 +58,8 @@ class Learnset {
       }
       
       if (pokemon.species === 'Lycanroc-Dusk') {
+        pokemon = dex.getTemplate('Rockruff-Dusk');
+      } else if (pokemon.prevo) {
         pokemon = dex.getTemplate(pokemon.prevo);
         srcMon = 'prevo';
         if (pokemon.gen > this.gen) {
