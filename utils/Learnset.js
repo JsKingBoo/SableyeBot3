@@ -12,11 +12,9 @@ class Learnset {
     this.learnset = [];
     this.gen = dex.gen;
     
-    if (learnsetCache[this.gen]) {
-      if (learnsetCache[this.gen][this.pokemon]) {
-        this.learnset = learnsetCache[this.gen][this.pokemon];
-        return;
-      }
+    if (learnsetCache[this.gen] && learnsetCache[this.gen][this.pokemon]) {
+      this.learnset = [this.gen][this.pokemon];
+      return;
     }
     
     let alreadyChecked = {};
@@ -59,11 +57,10 @@ class Learnset {
         }
       }
       
-      if (pokemon.prevo) {
-        let oldGen = pokemon.gen;
+      if (pokemon.species === 'Lycanroc-Dusk') {
         pokemon = dex.getTemplate(pokemon.prevo);
         srcMon = 'prevo';
-        if (pokemon.gen > oldGen) {
+        if (pokemon.gen > this.gen) {
           pokemon = null;
         }
       } else if (pokemon.baseSpecies && pokemon.baseSpecies === 'Rotom') {
@@ -78,7 +75,6 @@ class Learnset {
       learnsetCache[this.gen] = {};
     }
     learnsetCache[this.gen][this.pokemon] = this.learnset;
-    
   }
   
   findMove(moveid, gen = null) {

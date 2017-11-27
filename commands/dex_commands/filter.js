@@ -18,6 +18,10 @@ function alphanumeric(str) {
   return str.toLowerCase().replace(/[^0-9a-z]/gi, '');
 }
 
+function isMultiValue(obj) {
+  return (obj.constructor === [].constructor || obj.constructor === {}.constructor);
+}
+
 function multiValueChecker(operator, multiValue, value) {
   /*
 	Iterates through a list to check if it's equal. "=" is treated as OR while "<>" is treated as AND
@@ -39,23 +43,20 @@ function multiValueChecker(operator, multiValue, value) {
     }
   } else {
     //Not a multivalue
-    return false;
+    return null;
   }
   return !isEqual;
 }
 
 const falseyValues = {
   'false': true,
-  '0': true,
   'null': true,
   'undefined': true,
-  'nan': true,
   'no': true
 };
 
 const truthyValues = {
   'true': true,
-  '1': true,
   'exists': true,
   'defined': true,
   'yes': true
@@ -317,7 +318,13 @@ module.exports = {
           continue;
         }
         parameter.verified = true;
-        if (operatorCompare[parameter.operator](pokemonProperty, parameter.value) || multiValueChecker(parameter.operator, pokemonProperty, parameter.value)) {
+        let parameterCheck = false;
+        if (isMultiValue(pokemonProperty)) {
+          parameterCheck = multiValueChecker(parameter.operator, pokemonProperty, parameter.value);
+        } else {
+          parameterCheck = operatorCompare[parameter.operator](pokemonProperty, parameter.value);
+        }
+        if (parameterCheck) {
           fitParameters++;
         }
       }
@@ -358,10 +365,10 @@ module.exports = {
     let verifyMatch = false;
     let fits = Object.keys(speciesMatch).sort((a, b) => { return b - a; });
     for (let i = 0; i < fits.length; i++) {
-      let fitsIndex = fits[i];
+      let fitsIndex = parseInt(fits[i]);
       if (!speciesMatch[fitsIndex]) { continue; }
       verifyMatch = true;
-      sendMsg.push(`Pokémon that satisfy ${fitsIndex} parameter${fitsIndex === 1 ? "" : "s"}:`);
+      sendMsg.push(`Pokémon that satisfy ${fitsIndex} parameter${fitsIndex === 1 ? '' : 's'}:`);
       for (let sortIndex = 0; sortIndex < sortParameters.length; sortIndex++) {
         let sorter = sortParameters[sortIndex];
         speciesMatch[fitsIndex].sort(function(aa, bb) {

@@ -1,3 +1,10 @@
+### 3.1.2 - 2017-11-27
+ * Fix `filter.js` not parsing != operator correctly
+ * Fix typo in `filter.js`
+ * Fix bug where learnsets from prevos were not properly inherited into their parent
+ * Changed some acceptable falsey/truthy values in `filter.js` 
+ * Update friend code to accept USUM games
+
 ### 3.1.1 - 2017-10-08
  * Fix `filter.js` not parsing strings correctly
 
