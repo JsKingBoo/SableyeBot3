@@ -95,18 +95,23 @@ class CommandManager {
         }
         
         let commandOutput;
-        switch (command.commandType) {
-          case 'BotCommand':
-            commandOutput = command.execute(msg, parsedFlags);
-            break;
-          case 'DexCommand':
-            commandOutput = command.execute(msg, parsedFlags, passDex);
-            break;
-          case 'FCCommand':
-            commandOutput = command.execute(msg, parsedFlags, authorId, fcm);
-            break;
-          default:
-            commandOutput = command.execute(msg, parsedFlags);
+        try {
+          switch (command.commandType) {
+            case 'BotCommand':
+              commandOutput = command.execute(msg, parsedFlags);
+              break;
+            case 'DexCommand':
+              commandOutput = command.execute(msg, parsedFlags, passDex);
+              break;
+            case 'FCCommand':
+              commandOutput = command.execute(msg, parsedFlags, authorId, fcm);
+              break;
+            default:
+              commandOutput = command.execute(msg, parsedFlags);
+          }
+        } catch (e) {
+          console.log(`ERROR: ${e} at ${e.stack}\nfrom command ${command.name}\nwith input ${msg}\nwith parsedFlags ${parsedFlags}`);
+          commandOutput = false;
         }
        
         let badOutput = false;

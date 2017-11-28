@@ -1,3 +1,7 @@
+### 3.1.3 - 2017-11-28
+ * Add basic anti-crash logging
+ * Fix typo in `Learnset` that failed every learnset creation after the first
+
 ### 3.1.2 - 2017-11-27
  * Fix `filter.js` not parsing != operator correctly
  * Fix typo in `filter.js`

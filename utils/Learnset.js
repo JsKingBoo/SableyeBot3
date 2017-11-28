@@ -3,6 +3,7 @@
 var learnsetCache = {};
 
 class Learnset {
+
   constructor (pokemon, dex) {
     if (typeof pokemon === 'string') {
       pokemon = dex.getTemplate(pokemon);
@@ -13,7 +14,7 @@ class Learnset {
     this.gen = dex.gen;
     
     if (learnsetCache[this.gen] && learnsetCache[this.gen][this.pokemon]) {
-      this.learnset = [this.gen][this.pokemon];
+      this.learnset = learnsetCache[this.gen][this.pokemon];
       return;
     }
     
