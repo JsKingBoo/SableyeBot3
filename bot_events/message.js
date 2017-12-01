@@ -46,7 +46,7 @@ module.exports = function message(msg) {
   }
   msgContent = msgContent.join(" ").slice(cmd.length).split(",");
   
-  let commandOutput = cm.executeCommand(cmd, msgContent, flags, msg.author.id);
+  let commandOutput = cm.executeCommand(cmd, msgContent, flags, msg);
   
   if (!commandOutput) {
     return;

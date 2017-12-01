@@ -67,7 +67,7 @@ module.exports = {
           move = dex.getMove(move[0].name);
         }
       }
-      if (move.gen > dex.gen && !flags.verbose) {
+      if (move && move.gen > dex.gen && !flags.verbose) {
         return `${move.name} did not exist in gen${dex.gen}; it was introduced in gen${move.gen}.`;
       }
     }

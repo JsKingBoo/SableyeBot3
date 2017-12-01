@@ -54,8 +54,9 @@ class CommandManager {
 		});
   }
   
-  executeCommand(cmd, msg = [], flags, authorId) {
+  executeCommand(cmd, msg = [], flags, msgMetadata) {
     let passDex = Dex;
+    let authorId = msgMetadata.author.id;
     let isAdmin = config.admins.includes(parseInt(authorId));
     
     if (cmd === `${config.dexCommandPrefix}${config.helpCommand}` || cmd === `${config.botCommandPrefix}${config.helpCommand}`) {
@@ -110,7 +111,7 @@ class CommandManager {
               commandOutput = command.execute(msg, parsedFlags);
           }
         } catch (e) {
-          console.log(`ERROR: ${e} at ${e.stack}\nfrom command ${command.name}\nwith input ${msg}\nwith parsedFlags ${parsedFlags}`);
+          console.log(`ERROR: ${e} at ${e.stack}\nfrom command ${command.name}\nwith input ${msg}\nwith parsedFlags ${JSON.stringify(parsedFlags)}\nin server ${msgMetadata.guild} by user ${authorId} (${msgMetadata.author.username}#${msgMetadata.author.discriminator})`);
           commandOutput = false;
         }
        

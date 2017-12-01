@@ -1,3 +1,7 @@
+### 3.1.4 - 2017-12-01
+ * Fix `FCManager` not correctly storing discord ID
+ * Improve anti-crash logging
+
 ### 3.1.3 - 2017-11-28
  * Add basic anti-crash logging
  * Fix typo in `Learnset` that failed every learnset creation after the first
