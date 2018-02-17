@@ -61,9 +61,11 @@ Temporary Items
 /utils/dex.js
 /utils/dex-data.js
 
+# Sprites
+/sprites/*
+
 # Hide log and config files
-/logs/*.json
-/logs/*.txt
+/logs/*
 
 config.js
 /configs

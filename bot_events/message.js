@@ -52,8 +52,8 @@ module.exports = function message(msg) {
     return;
   }
   
-  if (typeof commandOutput === 'object') { //RichEmbed
-    msg.channel.send('', {'embed': commandOutput});
+  if (typeof commandOutput === 'object') {
+    msg.channel.send(commandOutput.msg, commandOutput);
   } else if (commandOutput.length < config.forcePM) {
     msg.channel.send(commandOutput, config.messageOptions);
   } else {

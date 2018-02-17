@@ -8,7 +8,7 @@ module.exports = {
   adminOnly: false,
   hasCustomFormatting: true,
   process: (msg, flags) => {
-    return ({
+    return ({'msg': '', 'embed': {
       title: "About SableyeBot",
       description: "Competitive Pokemon Discord bot.",
       url: "https://github.com/JsKingBoo/SableyeBot3",
@@ -23,7 +23,7 @@ module.exports = {
       footer: {
         text: `SableyeBot version ${packagejson.version}`
       }
-    });
+    }});
     
   }
 };

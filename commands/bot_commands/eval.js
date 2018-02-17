@@ -3,8 +3,11 @@
 const path = require('path');
 const fs = require('fs');
 
-const BASE_DIR = __dirname;
-const Dex = require(path.resolve(__dirname, '../../utils/dex.js'));
+const BASE_DIR = path.resolve(__dirname, '../../');
+const UTILS_DIR = path.resolve(BASE_DIR, 'utils/');
+const DATA_DIR = path.resolve(BASE_DIR, 'data/');
+
+const Dex = require(path.resolve(UTILS_DIR, 'dex.js'));
 
 module.exports = {
   desc: "Evaluate an arbitrary expression",
