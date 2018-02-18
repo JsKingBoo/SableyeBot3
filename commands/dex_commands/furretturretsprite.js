@@ -11,25 +11,23 @@ const hdSpritePath = path.resolve(__dirname, '../../sprites/')
 module.exports = {
   desc: "Image link of a Pokémon, or link to sprite directory if no argument is given. Uses FurretTurret's HD sprite library.",
   usage: "[Pokémon name]",
-  aliases: ['ftsprite', 'hdsprite'],
+  elevated: true,
+  aliases: ['ftsprite', 'hdsprite', 'hqsprite'],
   options: [{
     name: "shiny",
     value: false,
-    desc: "Enables shiny varient."
+    desc: "Enables shiny variant."
   },
   {
     name: "female",
     value: false,
-    desc: "Enables female varient, if available."
+    desc: "Enables female variant, if available."
   }],
   hasCustomFormatting: true,
   process: (msg, flags) => {
     if (msg.length === 0){
       return null;
     }
-    
-    //Only shiny available so far
-    flags.shiny = true;
 		
     let pokemon = dex.getTemplate(msg[0]);
     if (!pokemon || !pokemon.exists) {
@@ -52,7 +50,7 @@ module.exports = {
     if (flags.shiny) {
       dir = 'shiny';
     } else {
-      dir = 'normal';
+      dir = 'regular';
     }
 		    
     if (flags.female) {

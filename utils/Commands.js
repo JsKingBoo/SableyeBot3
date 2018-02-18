@@ -10,6 +10,7 @@ class Command {
     this.desc = cmd.desc || "No description.";
     this.longDesc = cmd.longDesc || this.desc;	
     this.adminOnly = cmd.adminOnly || false;
+    this.elevated = cmd.elevated || false;
     this.aliases = cmd.aliases || [];
     this.disabled = cmd.disabled || false;
     this.hasCustomFormatting = cmd.hasCustomFormatting || false;

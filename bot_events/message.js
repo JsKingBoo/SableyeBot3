@@ -25,7 +25,7 @@ module.exports = function message(msg) {
   if (msg.author.bot) {
     return;
   }
-  if (!(msg.content.startsWith(config.botCommandPrefix) || msg.content.startsWith(config.dexCommandPrefix))) {
+  if (!(msg.content.startsWith(config.botCommandPrefix) || msg.content.startsWith(config.dexCommandPrefix) || msg.content.startsWith(config.fcCommandPrefix))) {
     return;
   }
   if (Logger.blacklisted(msg.author.id)) {

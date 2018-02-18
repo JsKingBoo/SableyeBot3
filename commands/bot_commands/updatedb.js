@@ -9,7 +9,6 @@ module.exports = {
   usage: "",
   adminOnly: true,
   process: (msg, flags) => {
-    return "Update called. Will reboot automatically."
     update();
   }
 };

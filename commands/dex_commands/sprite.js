@@ -14,22 +14,22 @@ module.exports = {
   options: [{
     name: "shiny",
     value: false,
-    desc: "Enables shiny varient."
+    desc: "Enables shiny variant."
   },
   {
     name: "back",
     value: false,
-    desc: "Enables back varient."
+    desc: "Enables back variant."
   },
   {
     name: "female",
     value: false,
-    desc: "Enables female varient, if available."
+    desc: "Enables female variant, if available."
   },
   {
     name: "noani",
     value: false,
-    desc: "Prefer the non-animated varient, if available."
+    desc: "Prefer the non-animated variant, if available."
   },
   {
     name: "afd",

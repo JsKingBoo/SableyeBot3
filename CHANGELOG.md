@@ -1,8 +1,12 @@
+### 3.1.6 - 2018-02-17
+ * Add "elevated" permission level
+ * Fix `updatedb.js` doing nothing
+
 ### 3.1.5 - 2018-02-16
-  * Add automatic database update (mostly)
-  * Changed how command outputs are parsed
-  * Comment out automatic setting avatar
-  * Wonder why people haven't found the Easter Egg (on live) yet
+ * Add automatic database update (mostly)
+ * Changed how command outputs are parsed
+ * Comment out automatic setting avatar
+ * Wonder why people haven't found the Easter Egg (on live) yet
   
 ### 3.1.4 - 2017-12-01
  * Fix `FCManager` not correctly storing discord ID

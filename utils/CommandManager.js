@@ -57,6 +57,7 @@ class CommandManager {
   executeCommand(cmd, msg = [], flags, msgMetadata) {
     let passDex = Dex;
     let authorId = msgMetadata.author.id;
+    let isElevated = config.elevated.includes(parseInt(authorId));
     let isAdmin = config.admins.includes(parseInt(authorId));
     
     if (cmd === `${config.dexCommandPrefix}${config.helpCommand}` || cmd === `${config.botCommandPrefix}${config.helpCommand}`) {
@@ -64,16 +65,19 @@ class CommandManager {
       for (let i = 0; i < this.commands.length; i++){
         let command = this.commands[i];
         if (command.trigger(`${usedPrefix}${msg[0]}`)) {
-          return this.helpCommand(usedPrefix, command, flags, isAdmin);
+          return this.helpCommand(usedPrefix, command, flags, isAdmin, isElevated);
         }
       }
-      return this.helpCommand(usedPrefix, '', flags, isAdmin);
+      return this.helpCommand(usedPrefix, '', flags, isAdmin, isElevated);
     }
     
     for (let i = 0; i < this.commands.length; i++){
       let command = this.commands[i];
       if (command.trigger(cmd)) {        
         if (command.adminOnly && !isAdmin) {
+          return undefined;
+        }
+        if (command.elevated && !isAdmin && !isElevated) {
           return undefined;
         }
         let parsedFlags = {};        
@@ -157,7 +161,7 @@ class CommandManager {
     return null;
   }
   
-  helpCommand(prefix, cmd, flags, isAdmin) {
+  helpCommand(prefix, cmd, flags, isAdmin, isElevated) {
     Logger.logCommand(`${config.helpCommand}`);
     let sendMsg = [];
     if (!cmd) {
@@ -165,7 +169,7 @@ class CommandManager {
       sendMsg.push("~~");
       for (let i = 0; i < this.commands.length; i++){
         let command = this.commands[i];
-        if (command.prefix === prefix && !command.disabled && (isAdmin || !command.adminOnly)) {
+        if (command.prefix === prefix && !command.disabled && (isAdmin || !command.adminOnly) && (isAdmin || isElevated || !command.elevated)) {
           sendMsg.push(`${command.toString()} - ${command.desc}`);
         }
       }
@@ -177,7 +181,10 @@ class CommandManager {
     }
       
     if (cmd.adminOnly && !isAdmin) {
-      return `${cmd.name} is an admin-only command.`;
+      return "```" + `${cmd.name} is an admin-only command.` + "```";
+    }
+    if (cmd.elevated && !isAdmin && !isElevated) {
+      return "```" + `${cmd.name} is an elevated-only command.` + "```";
     }
     
     sendMsg = [

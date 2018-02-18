@@ -20,6 +20,7 @@ for (let i = 0; i < SHOWDOWN_DATA_FILE_NAMES.length; i++) {
 function update() {
  
   let saveFile = function(fileId) {
+    console.log('file '+  fileId + '/' + files.length)
     if (fileId >= files.length) {
       console.log('FINISHED! REBOOTING...');
       process.exit(2);
