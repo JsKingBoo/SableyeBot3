@@ -1,3 +1,8 @@
+### 3.1.7 - 2018-03-24
+ * Fix `pokedex.js` showing abilities that didn't exist yet on older generations
+ * Improve `addgame.js` help
+ * Fix various typos
+
 ### 3.1.6 - 2018-02-17
  * Add "elevated" permission level
  * Fix `updatedb.js` doing nothing

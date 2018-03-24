@@ -2,6 +2,22 @@
 
 module.exports = {
   desc: "Add game information to your account.",
+  longDesc: [
+    "Add game information to your account. Abbreviations are:",
+    " - Black: B",
+    " - White: W",
+    " - Black 2: B2",
+    " - White 2: W2",
+    " - X: X",
+    " - Y: Y",
+    " - Omega Ruby: OR",
+    " - Alpha Sapphire: AS",
+    " - Sun: S",
+    " - Moon: M",
+    " - Ultra Sun: US",
+    " - Ultra Moon: UM",
+    "TSV stands for Trainer Shiny Value and is used to determine whether a Pokémon egg hatches a shiny."
+  ],
   usage: '<abbreviated game>, <in-game name>, [TSV value]',
   process: (msg, flags, authorId, fcm) => {
     if (msg.length < 2) {

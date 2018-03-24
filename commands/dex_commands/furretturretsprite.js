@@ -60,10 +60,20 @@ module.exports = {
     }
     
     dir = `${hdSpritePath}/${dir}/${spriteId}${ending}`;
-    if (fs.existsSync(dir)) {
-      return ({'msg': '```Sprites by https://www.furretturret.com/resources```', 'files': [dir]});
+    let credits = "```HD Pokémon sprites by FurretTurret.com:```";
+    if (flags.shiny) {
+      credits += "https://www.furretturret.com/resources/hd/shiny";
     } else {
-      return `${dir} does not exist`;
+      credits += "https://www.furretturret.com/resources/hd/regular";
+    }
+    if (fs.existsSync(dir)) {
+      let fileSize = fs.statSync(dir).size / 1000000.0;
+      if (fileSize > 7.5) {
+      return "```" + `ERROR: Filesize too large! (${fileSize} MB)` + "```"
+      }
+      return ({'msg': credits, 'files': [dir]});
+    } else {
+      return "```" + `${spriteId}${ending} not found` + "```";
     }
   }
 };

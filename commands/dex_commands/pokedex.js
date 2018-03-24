@@ -37,15 +37,19 @@ module.exports = {
     if (pokemon.gen > dex.gen) {
       return `${pokemon.species} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.`;
     }
-         
-    let abilitiesStr = [pokemon.abilities['0']];
-    if (pokemon.abilities['1']) {
-      abilitiesStr.push(pokemon.abilities['1']);
+     
+    // Must check ability compatibility
+    let abilitiesStr = 'Ability: <none>';
+    if (dex.gen >= 3) {
+      abilitiesStr = [pokemon.abilities['0']];
+      if (pokemon.abilities['1'] && dex.getAbility(pokemon.abilities['1']).gen <= dex.gen) {
+        abilitiesStr.push(pokemon.abilities['1']);
+      }
+      if (pokemon.abilities['H']) {
+        abilitiesStr.push(pokemon.abilities['H'] + " (Hidden)");
+      }
+      (abilitiesStr.length === 1) ? abilitiesStr = 'Ability: ' + abilitiesStr[0] : abilitiesStr = `Abilities: ${abilitiesStr.join(", ")}`;
     }
-    if (pokemon.abilities['H']) {
-      abilitiesStr.push(pokemon.abilities['H'] + " (Hidden)");
-    }
-    (abilitiesStr.length === 1) ? abilitiesStr = 'Ability: ' + abilitiesStr[0] : abilitiesStr = `Abilities: ${abilitiesStr.join(", ")}`;
     
     let bstStr = (flags.verbose ? ` [BST: ${(pokemon.baseStats.hp + pokemon.baseStats.atk + pokemon.baseStats.spa + pokemon.baseStats.spe + pokemon.baseStats.def + pokemon.baseStats.spd)}]` : '');
     
