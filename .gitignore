@@ -55,6 +55,7 @@ Temporary Items
 # https://github.com/Zarel/Pokemon-Showdown-Client/tree/master/data
 /data
 /mods
+/config/formats.js
 
 # Showdown dex - facilitates parsing Showdown databases
 # https://github.com/Zarel/Pokemon-Showdown/tree/master/sim

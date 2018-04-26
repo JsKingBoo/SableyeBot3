@@ -123,7 +123,7 @@ module.exports = {
         if (search.length === 0) {
           return `${pokemon.name} cannot obtain ${move.name} in gen${dex.gen}`;
         } else {
-          return `${pokemon.name} can obtain ${move.name} in a previous generation.`;
+          return `${pokemon.name} can obtain ${move.name} in another generation.`;
         }
       }
       let parseResults = {};

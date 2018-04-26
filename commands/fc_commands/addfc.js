@@ -2,6 +2,7 @@
 
 module.exports = {
   desc: "Register your friend code",
+  longDesc: "Link your friend code to your Discord account. By doing so, anyone can look up and find your friend code using the `fc` command so long as they know what your Discord ID is. Enter your friend code as a string of digits with or without dashes.",
   usage: '<friend code>, [Mii name]',
   process: (msg, flags, authorId, fcm) => {
     let miiName = (msg.length > 1 ? msg.splice(1).join(',').trim() : null);

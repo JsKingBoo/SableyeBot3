@@ -1,3 +1,9 @@
+### 3.1.8 - 2018-04-25
+ * Add Flying Press and Freeze-Dry support to `coverage.js`
+ * Improve `addfc.js` help
+ * Update README to reflect changes in installation instructions
+ * Fix various typos
+
 ### 3.1.7 - 2018-03-24
  * Fix `pokedex.js` showing abilities that didn't exist yet on older generations
  * Improve `addgame.js` help

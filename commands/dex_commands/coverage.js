@@ -1,5 +1,26 @@
 'use strict';
 
+let flyingPressEffectiveness =  {
+  Bug: 0,
+  Dark: 1,
+  Dragon: 0,
+  Electric: 2,
+  Fairy: 2,
+  Fighting: 1,
+  Fire: 0,
+  Flying: 2,
+  Ghost: 3,
+  Grass: 1,
+  Ground: 0,
+  Ice: 1,
+  Normal: 1,
+  Poison: 2,
+  Psychic: 2,
+  Rock: 0,
+  Steel: 0,
+  Water: 0
+};
+
 module.exports = {
   desc: "Provides coverage versus single types.",
   longDesc: "Provides a Pokemon's or a moveset's coverage versus a single type.",
@@ -26,6 +47,12 @@ module.exports = {
         if (dex.data.TypeChart[capitalCaseType]) {
           attackTyping.push(capitalCaseType);
         }
+        if (capitalCaseType === 'Flyingpress' && dex.gen >= 7) {
+          attackTyping.push("Flying Press");
+        }
+        if (capitalCaseType === 'Freezedry' && dex.gen >= 7) {
+          attackTyping.push("Freeze-Dry");
+        }
       }
     } else {
       attackTyping = pokemon.types;
@@ -36,10 +63,10 @@ module.exports = {
     
     let sendMsg = [
       `${pokemon.name} [${attackTyping.join('/')}]`,
-      'x0.00: ',
-      'x0.50: ',
-      'x1.00: ',
-      'x2.00: ',
+      "x0.00: ",
+      "x0.50: ",
+      "x1.00: ",
+      "x2.00: ",
     ];
     
     let effective = {};
@@ -56,7 +83,21 @@ module.exports = {
       effective[types[i]] = 0;
       
       for (let j = 0; j < attackTyping.length; j++) {
-        effective[types[i]] = Math.max(effective[types[i]], typeChartToModifierMap[dex.data.TypeChart[types[i]].damageTaken[attackTyping[j]]]);
+        let effectivenessIndex = 0;
+        if (attackTyping[j] === "Flying Press") {
+          effectivenessIndex = flyingPressEffectiveness[types[i]];
+        } else if (attackTyping[j] === "Freeze-Dry") {
+          if (types[i] === 'Ice') {
+            //Freeze-Dry is ALWAYS super effective against ice even in inverse battles
+            effectivenessIndex = (flags.inverse ? 2 : 1); 
+          } else {
+            effectivenessIndex = dex.data.TypeChart[types[i]].damageTaken['Water'];
+          }
+        } else {
+          effectivenessIndex = dex.data.TypeChart[types[i]].damageTaken[attackTyping[j]];
+        }
+        
+        effective[types[i]] = Math.max(effective[types[i]], typeChartToModifierMap[effectivenessIndex]);
       }
       
       sendMsg[effective[types[i]] + 1] += `${types[i]}; `;

@@ -10,7 +10,7 @@ if (cluster.isMaster) {
     if (signal) {
       console.log(`Worker killed by signal: ${signal}`);
     } else if (code !== 0) {
-      code = code.toString();
+      code = JSON.stringify(code);
       console.log(`Worker exited with error code: ${code}`);
     } else {
       console.log('Worker ended with no code nor signal');
