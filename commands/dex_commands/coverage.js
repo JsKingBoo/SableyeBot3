@@ -87,8 +87,8 @@ module.exports = {
         if (attackTyping[j] === "Flying Press") {
           effectivenessIndex = flyingPressEffectiveness[types[i]];
         } else if (attackTyping[j] === "Freeze-Dry") {
-          if (types[i] === 'Ice') {
-            //Freeze-Dry is ALWAYS super effective against ice even in inverse battles
+          if (types[i] === 'Water') {
+            //Freeze-Dry is ALWAYS super effective against water even in inverse battles
             effectivenessIndex = (flags.inverse ? 2 : 1); 
           } else {
             effectivenessIndex = dex.data.TypeChart[types[i]].damageTaken['Water'];

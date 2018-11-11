@@ -6,7 +6,7 @@ const dex = require(path.resolve(__dirname, '../../utils/dex.js'));
 
 const minidex = require(path.resolve(__dirname, '../../data/pokedex-mini.js'))['BattlePokemonSprites'];
 
-const hdSpritePath = path.resolve(__dirname, '../../sprites/')
+const hdSpritePath = path.resolve(__dirname, '../../sprites/');
 
 module.exports = {
   desc: "Image link of a Pokémon, or link to sprite directory if no argument is given. Uses FurretTurret's HD sprite library.",
@@ -52,7 +52,7 @@ module.exports = {
     } else {
       dir = 'regular';
     }
-		    
+
     if (flags.female) {
       if (dexData['frontf']){
         spriteId += '_Female';
@@ -69,7 +69,7 @@ module.exports = {
     if (fs.existsSync(dir)) {
       let fileSize = fs.statSync(dir).size / 1000000.0;
       if (fileSize > 7.5) {
-      return "```" + `ERROR: Filesize too large! (${fileSize} MB)` + "```"
+        return "```" + `ERROR: Filesize too large! (${fileSize} MB)` + "```";
       }
       return ({'msg': credits, 'files': [dir]});
     } else {
@@ -79,5 +79,5 @@ module.exports = {
 };
 
 function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }

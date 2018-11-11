@@ -1,3 +1,8 @@
+### 3.1.9 - 2018-11-10
+ * Add "resist" filter parameter to `filter.js`
+ * Update `package.lock.json` so Github stop complaining
+ * Various styling fixes
+
 ### 3.1.8 - 2018-04-25
  * Add Flying Press and Freeze-Dry support to `coverage.js`
  * Improve `addfc.js` help

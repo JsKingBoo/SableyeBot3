@@ -74,6 +74,5 @@ config.js
 # Unused
 /utils/Queue.js
 /utils/meme.js
-/commands/dex_commands/furretturretsprite.js
 
 /node_modules

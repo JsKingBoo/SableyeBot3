@@ -60,10 +60,7 @@ module.exports = {
       for (let j = 0; j < targetTyping.length; j++) {
         effective[types[i]] += typeChartToModifierMap[dex.data.TypeChart[targetTyping[j]].damageTaken[types[i]]];
       }
-      
-      if (effective[types[i]] < -3) {
-        effective[types[i]] = -3;
-      }
+      effective[types[i]] = Math.max(-3, effective[types[i]]);
       sendMsg[effective[types[i]] + 4] += `${types[i]}; `;
     }
     
