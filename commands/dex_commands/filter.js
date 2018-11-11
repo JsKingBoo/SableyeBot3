@@ -66,6 +66,7 @@ function getEffectiveness(defending, attacking, dex) {
   if (defending.length > 1) {
     return getEffectiveness([defending[0]], attacking, dex) + getEffectiveness([defending[1]], attacking, dex);
   }
+  let effectiveness = dex.data.TypeChart[defending].damageTaken[attacking];
   if (effectiveness === 1) {
     return 1;
   } else if (effectiveness === 2) {
