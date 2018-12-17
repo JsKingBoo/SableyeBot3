@@ -1,3 +1,8 @@
+### 3.1.10 - 2018-12-17
+ * Add invite link to `about.js`
+ * Add command usage when using `//help <cmd>`
+ * Fix `resist` filter parameter failing on non-equals operators
+
 ### 3.1.9 - 2018-11-10
  * Add "resist" filter parameter to `filter.js`
  * Update `package.lock.json` so Github stop complaining

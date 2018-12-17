@@ -189,7 +189,7 @@ class CommandManager {
     
     sendMsg = [
       cmd.name,
-      '',
+      `${prefix}${cmd.name} ${cmd.usage}`,
       cmd.longDesc,
       '',
       `Aliases: ${cmd.aliases.join(", ")}`,

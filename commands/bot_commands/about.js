@@ -18,6 +18,7 @@ module.exports = {
       },
       color: 0x5F32AB,
       fields: [
+        {name: "Invite Link", value: "[Click here](https://discordapp.com/oauth2/authorize?&client_id=211522070620667905&scope=bot)"},
         {name: "Language", value: "JavaScript (discordjs)"}
       ],
       footer: {

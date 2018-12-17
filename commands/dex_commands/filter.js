@@ -192,12 +192,12 @@ module.exports = {
     {
       name: "alola",
       value: false,
-      desc: "Includes only VGC legal Pokémon."
+      desc: "Only consider VGC17 legal Pokémon."
     },
     {
       name: "verbose",
       value: false,
-      desc: "Output as many Pokémon as possible."
+      desc: "Output all Pokémon that satisfy at least one parameter."
     }],
   regex: /[^0-9a-z\-=<>!]/gi,
   process: (msg, flags, dex) => {
@@ -340,7 +340,8 @@ module.exports = {
           parameterCheck = multiValueChecker(parameter.operator, pokemonProperty, parameter.value);
         } else if (pokemonProperty === "*") {
           if (parameter.key === "resist") {
-            parameterCheck = (getEffectiveness(template.types, parameter.value.charAt(0).toUpperCase() + parameter.value.slice(1), dex) < 0);
+            let resists = (getEffectiveness(template.types, parameter.value.charAt(0).toUpperCase() + parameter.value.slice(1), dex) < 0);
+            parameterCheck = operatorCompare[parameter.operator](resists, true);
           }
         } else {
           parameterCheck = operatorCompare[parameter.operator](pokemonProperty, parameter.value);
