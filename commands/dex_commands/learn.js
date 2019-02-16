@@ -12,7 +12,7 @@ let sourceNames = {
   T:"tutor", 
   X:"egg, traded back", 
   Y:"event, traded back", 
-  V:"VC transfer from gen1"
+  V:"VC transfer from Gen 1/2"
 };
 
 module.exports = {
