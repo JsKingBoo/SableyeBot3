@@ -1,3 +1,6 @@
+### 3.1.11 - 2019-04-05
+ * Fix typo in `learn.js`
+
 ### 3.1.10 - 2018-12-17
  * Add invite link to `about.js`
  * Add command usage when using `//help <cmd>`
