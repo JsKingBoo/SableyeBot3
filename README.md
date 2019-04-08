@@ -9,12 +9,11 @@ SableyeBot requires NodeJS 8.0+. In order to run your own local copy of SableyeB
 
 1. Download this repository.
 2. Rename `config.js.example` to `config.js` and fill out the empty fields and/or change the default values.
-3. Go to and download the [Pokemon-Showdown](https://github.com/Zarel/Pokemon-Showdown) repository. You only need four folders: `/sim`, `/data`, `/mods`, and `/config`
+3. Download and build the [Pokemon-Showdown](https://github.com/Zarel/Pokemon-Showdown) repository. You only need four folders: `/sim`, `/data`, `/mods`, and `/config.
 4. In `/sim`, move `dex.js` and `dex-data.js` into the `/utils` folder of SableyeBot
 5. Move `/data` and `/mods` to the root directory of SableyeBot
 6. Move `/config` to the root directory of SableyeBot. You may delete everything except `formats.js` if you wish. (SableyeBot only uses that one file.)
-7. Go to and download the [Pokemon-Showdown-Client](https://github.com/Zarel/Pokemon-Showdown-Client) repository. You only need one folder: `/data`
-8. Move `pokedex-mini.js` and `pokedex-mini-bw.js` into the SableyeBot `/data` folder.
+7. Download the files [`pokedex-mini.js`](https://play.pokemonshowdown.com/data/pokedex-mini.js) and [`pokedex-mini-bw.js`](https://play.pokemonshowdown.com/data/pokedex-mini-bw.js) into the `/data` folder.
 
 If the steps above are performed correctly, you should be able to run `node index.js` and the bot will launch.
 
