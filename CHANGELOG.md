@@ -1,3 +1,8 @@
+### 3.1.12 - 2019-04-25
+ * Add --vgclegal and --gscup options to `//filter`
+ * All commands run asynchronously
+ * Update README to reflect changes in dependencies
+
 ### 3.1.11 - 2019-04-05
  * Fix typo in `learn.js`
 
