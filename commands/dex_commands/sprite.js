@@ -1,9 +1,7 @@
 'use strict';
 
 const path = require('path');
-
-const minidex = require(path.resolve(__dirname, '../../data/pokedex-mini.js'))['BattlePokemonSprites'];
-const minidexbw = require(path.resolve(__dirname, '../../data/pokedex-mini-bw.js'))['BattlePokemonSpritesBW'];
+const http = require('http');
 
 const SPRITE_URL = 'http://play.pokemonshowdown.com/sprites/';
 
@@ -41,7 +39,7 @@ module.exports = {
     if (msg.length === 0){
       return "```PokemonShowdown's sprite directory:``` http://play.pokemonshowdown.com/sprites/";
     }
-		
+
     let pokemon = dex.getTemplate(msg[0]);
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex']);
@@ -50,14 +48,14 @@ module.exports = {
       }
       pokemon = dex.getTemplate(pokemon[0].name);
     }
-    
+
     if (pokemon.gen > dex.gen) {
       return '```' + `${pokemon.species} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.` + '```';
     }
-    
+
     let spriteId = pokemon.spriteid;
     let genNum = dex.gen;
-    if (flags.noani && genNum >= 6) { 
+    if (flags.noani && genNum >= 6) {
       genNum = 5;
     }
     if (pokemon.tier === 'CAP') {
@@ -66,21 +64,17 @@ module.exports = {
     if (pokemon.num === 0) {
       genNum = 1;
     }
-    
+
     let genData = {1:'rby', 2:'gsc', 3:'rse', 4:'dpp', 5:'bw', 6:'xy', 7:'xy'}[genNum];
     let ending = '.png';
     if (!flags.noani && genNum >= 5 && pokemon.num > 0) {
       genData += 'ani';
       ending = '.gif';
     }
-    
+
     let dir = '';
     let facing = 'front';
-    let dexData = minidex[pokemon.speciesid];
-    if (genNum === 5) {
-      dexData = minidexbw[pokemon.speciesid];
-    }
-    
+
     if (flags.back) {
       dir += '-back';
       facing = 'back';
@@ -92,15 +86,33 @@ module.exports = {
       dir = 'afd' + dir;
       return `${SPRITE_URL}${dir}/${spriteId}.png`;
     }
-		
+
     dir = genData + dir;
-    
+
     if (flags.female && genNum >= 4) {
-      if (dexData[facing + 'f']){
+      let checker = new Promise((resolve, reject) => {
+        let req = http.request({'host': 'play.pokemonshowdown.com',
+            'method': 'HEAD',
+            'path': `${SPRITE_URL}${dir}/${spriteId}-f${ending}`
+        });
+
+        req.on('response', res => {
+          resolve(res);
+        });
+
+        req.on('error', err => {
+          reject(err);
+        });
+
+        req.end();
+      });
+
+      let result = await checker;
+      if (result.statusCode === 200) {
         spriteId += '-f';
       }
     }
-    
+
     return `${SPRITE_URL}${dir}/${spriteId}${ending}`;
 
   }
