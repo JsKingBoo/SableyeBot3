@@ -9,7 +9,7 @@ module.exports = {
     desc: "Lists all servers"
   }],
   adminOnly: true,
-  process: (msg, flags) => {
+  process: async function(msg, flags) {
     let sendMsg = [];
     let servers = bot.guilds.array();
     sendMsg.push(`Currently watching ${servers.length} server${servers.length === 1 ? '' : 's'}`);

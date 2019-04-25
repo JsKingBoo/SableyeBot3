@@ -23,7 +23,7 @@ module.exports = {
   ],
   usage: "<ability name>",
   aliases: ['abilities', 'abil'],
-  process: (msg, flags, dex) => {
+  process: async function(msg, flags, dex) {
     if (msg.length === 0) {
       return null;
     }

@@ -213,7 +213,7 @@ module.exports = {
     },
   ],
   regex: /[^0-9a-z\-=<>!]/gi,
-  process: (msg, flags, dex) => {
+  process: async function(msg, flags, dex) {
     if (msg.length === 0) {
       return null;
     }

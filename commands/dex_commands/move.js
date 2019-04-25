@@ -12,7 +12,7 @@ module.exports = {
     value: false,
     desc: "Gives additional information such as target, generation, singles viability, and contest type."
   }],
-  process: (msg, flags, dex) => {
+  process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;
     }

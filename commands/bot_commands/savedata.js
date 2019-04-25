@@ -8,7 +8,7 @@ module.exports = {
   usage: "[command name]",
   options: [], //Some eventually
   adminOnly: true,
-  process: (msg, flags) => {
+  process: async function(msg, flags) {
     let command = null;
     if (msg.length > 0) {
       command = msg[0].trim().toLowerCase();

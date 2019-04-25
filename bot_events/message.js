@@ -21,7 +21,7 @@ cm.init()
     console.log("Error initiating CommandManager!", e);
   });
 
-module.exports = function message(msg) { 
+module.exports = function message(msg) {
   if (msg.author.bot) {
     return;
   }
@@ -31,7 +31,11 @@ module.exports = function message(msg) {
   if (Logger.blacklisted(msg.author.id)) {
     return;
   }
-  
+
+  resolveMessage(msg);
+};
+
+async function resolveMessage(msg) {
   let msgContent = msg.content.trim().split(" ");
   let cmd = msgContent[0];
   let flags = [];
@@ -45,13 +49,13 @@ module.exports = function message(msg) {
     i--;
   }
   msgContent = msgContent.join(" ").slice(cmd.length).split(",");
-  
-  let commandOutput = cm.executeCommand(cmd, msgContent, flags, msg);
-  
+
+  let commandOutput = await cm.executeCommand(cmd, msgContent, flags, msg);
+
   if (!commandOutput) {
     return;
   }
-  
+
   if (typeof commandOutput === 'object') {
     msg.channel.send(commandOutput.msg, commandOutput);
   } else if (commandOutput.length < config.forcePM) {
@@ -66,7 +70,7 @@ module.exports = function message(msg) {
         splitCommandOutput.push(commandOutput);
         break;
       }
-      
+
       //Try to split the message by cutting on these characters in priority order
       let sliceChars = ['\n', ',', ' ', ''];
       for (let j = 0; j < sliceChars.length; j++) {
@@ -81,7 +85,7 @@ module.exports = function message(msg) {
         break;
       }
     }
-    
+
     var timeoutWrapper = (strarr, ind) => {
       setTimeout(() => {
         msg.author.send("```" + strarr[ind].trim() + "```");
@@ -91,7 +95,7 @@ module.exports = function message(msg) {
       }, 1000);
     };
     timeoutWrapper(splitCommandOutput, 0);
-    
+
   }
-  
+
 };

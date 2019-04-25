@@ -4,7 +4,7 @@ module.exports = {
   desc: "Set current playing game.",
   usage: "<playing game>",
   adminOnly: true,
-  process: (msg, flags) => {
+  process: async function(msg, flags) {
     let str = msg.join(',');
     for (let i = 0; i < flags.length; i++) {
       str += ` ${config.flagPrefix}${flag.name}`;

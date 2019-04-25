@@ -3,7 +3,7 @@
 module.exports = {
   desc: "Remove game.",
   usage: '<game|game index>',
-  process: (msg, flags, authorId, fcm) => {
+  process: async function(msg, flags, authorId, fcm) {
     if (msg[0].length === 0) {
       return null;
     }

@@ -8,7 +8,7 @@ module.exports = {
   desc: "Update (most of the) Showdown databases",
   usage: "",
   adminOnly: true,
-  process: (msg, flags) => {
+  process: async function(msg, flags) {
     update();
   }
 };

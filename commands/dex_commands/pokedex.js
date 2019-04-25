@@ -19,7 +19,7 @@ module.exports = {
     value: false,
     desc: "Gives additional information such as BST, generation, weight, height, and tier."
   }],
-  process: (msg, flags, dex) => {    
+  process: async function(msg, flags, dex) {    
     if (msg.length === 0){
       return null;
     }

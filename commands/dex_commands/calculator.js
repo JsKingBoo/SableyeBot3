@@ -6,7 +6,7 @@ module.exports = {
   aliases: ['calc', 'damagecalc'],
   options: [],
   hasCustomFormatting: true,
-  process: (msg, flags, dex) => {
+  process: async function(msg, flags, dex) {
     return "```Pokemon damage calculator:``` https://pokemonshowdown.com/damagecalc/";
   }
 };
