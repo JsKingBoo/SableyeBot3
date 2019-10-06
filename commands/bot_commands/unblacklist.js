@@ -4,7 +4,7 @@ module.exports = {
   desc: "Remove user from blacklist",
   usage: "<user ID>",
   adminOnly: true,
-  process: (msg, flags) => {
+  process: async function(msg, flags) {
     if (msg.length === 0) {
       return 'No user ID given';
     }

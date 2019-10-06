@@ -54,7 +54,7 @@ class CommandManager {
 		});
   }
   
-  executeCommand(cmd, msg = [], flags, msgMetadata) {
+  async executeCommand(cmd, msg = [], flags, msgMetadata) {
     let passDex = Dex;
     let authorId = msgMetadata.author.id;
     let isElevated = config.elevated.includes(parseInt(authorId));
@@ -103,16 +103,16 @@ class CommandManager {
         try {
           switch (command.commandType) {
             case 'BotCommand':
-              commandOutput = command.execute(msg, parsedFlags);
+              commandOutput = await command.execute(msg, parsedFlags);
               break;
             case 'DexCommand':
-              commandOutput = command.execute(msg, parsedFlags, passDex);
+              commandOutput = await command.execute(msg, parsedFlags, passDex);
               break;
             case 'FCCommand':
-              commandOutput = command.execute(msg, parsedFlags, authorId, fcm);
+              commandOutput = await command.execute(msg, parsedFlags, authorId, fcm);
               break;
             default:
-              commandOutput = command.execute(msg, parsedFlags);
+              commandOutput = await command.execute(msg, parsedFlags);
           }
         } catch (e) {
           console.log(`ERROR: ${e} at ${e.stack}\nfrom command ${command.name}\nwith input ${msg}\nwith parsedFlags ${JSON.stringify(parsedFlags)}\nin server ${msgMetadata.guild} by user ${authorId} (${msgMetadata.author.username}#${msgMetadata.author.discriminator})`);

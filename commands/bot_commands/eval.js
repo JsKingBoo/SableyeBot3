@@ -13,7 +13,7 @@ module.exports = {
   desc: "Evaluate an arbitrary expression",
   usage: "<expression>",
   adminOnly: true,
-  process: (msg, flags) => {
+  process: async function(msg, flags) {
     msg = msg.join(',').trim();
     let output;
     try {

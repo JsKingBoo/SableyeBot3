@@ -7,7 +7,7 @@ module.exports = {
   options: [],
   adminOnly: false,
   hasCustomFormatting: true,
-  process: (msg, flags) => {
+  process: async function(msg, flags) {
     return ({'msg': '', 'embed': {
       title: "About SableyeBot",
       description: "Competitive Pokemon Discord bot.",

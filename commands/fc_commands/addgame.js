@@ -19,7 +19,7 @@ module.exports = {
     "TSV stands for Trainer Shiny Value and is used to determine whether a Pokémon egg hatches a shiny."
   ],
   usage: '<abbreviated game>, <in-game name>, [TSV value]',
-  process: (msg, flags, authorId, fcm) => {
+  process: async function (msg, flags, authorId, fcm) {
     if (msg.length < 2) {
       return null;
     }

@@ -3,7 +3,7 @@
 module.exports = {
   desc: "Remove friend code.",
   usage: '<friend code|friend code index>',
-  process: (msg, flags, authorId, fcm) => {
+  process: async function(msg, flags, authorId, fcm) {
     if (msg[0].length === 0) {
       return null;
     }

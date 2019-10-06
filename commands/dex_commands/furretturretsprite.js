@@ -24,7 +24,7 @@ module.exports = {
     desc: "Enables female variant, if available."
   }],
   hasCustomFormatting: true,
-  process: (msg, flags) => {
+  process: async function(msg, flags) {
     if (msg.length === 0){
       return null;
     }

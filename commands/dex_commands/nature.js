@@ -44,7 +44,7 @@ module.exports = {
   desc: "Information of a nature, or returns the nature given the boosted and hindered stat.",
   usage: "<nature name>|(<abbreviated boosted stat>, <abbreviated hindered stat>)",
   aliases: ['natures'],
-  process: (msg, flags, dex) => {
+  process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;
     }

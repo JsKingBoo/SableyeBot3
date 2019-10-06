@@ -7,7 +7,7 @@ module.exports = {
   usage: "<type>|(<hp IV>,<atk IV>,<def IV>,<spa IV>,<spd IV>,<spe IV>)",
   aliases: ['hp'],
   options: [],
-  process: (msg, flags, dex) => {
+  process: async function(msg, flags, dex) {
     if (dex.gen === 1) {
       return 'Hidden Power did not exist in gen1';
     }
