@@ -1,3 +1,7 @@
+### 3.1.12 - 2019-10-06
+ * Add tier information to non-verbose dex call
+ * Remove weight information from non-verbose dex call
+
 ### 3.1.11 - 2019-04-05
  * Fix typo in `learn.js`
 

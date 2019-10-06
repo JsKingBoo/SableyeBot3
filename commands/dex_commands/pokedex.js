@@ -58,18 +58,17 @@ module.exports = {
       `${abilitiesStr}`,
       `HP/ATK/DEF/SPA/SPD/SPE: ${pokemon.baseStats.hp}/${pokemon.baseStats.atk}/${pokemon.baseStats.def}/${pokemon.baseStats.spa}/${pokemon.baseStats.spd}/${pokemon.baseStats.spe}${bstStr}`
     ]);
-    
+
     if (flags.verbose) {
       sendMsg.push(`Introduced in gen${pokemon.gen}`);
     }
-    
-    let heightStr = (flags.verbose ? ` Height: ${pokemon.heightm}m; BMI: ${Math.round((100*pokemon.weightkg)/(pokemon.heightm*pokemon.heightm))/100}` : '');
-    sendMsg.push(`Weight: ${pokemon.weightkg}kg (${lowKickCalcs(pokemon.weightkg)} BP);${heightStr}`);
 
     if (flags.verbose) {
-      sendMsg.push(`Tier: ${pokemon.tier}`);
+      sendMsg.push(`Weight: ${pokemon.weightkg}kg (${lowKickCalcs(pokemon.weightkg)} BP); Height: ${pokemon.heightm}m; BMI: ${Math.round((100*pokemon.weightkg)/(pokemon.heightm*pokemon.heightm))/100}`);
     }
-    
+
+    sendMsg.push(`Tier: ${pokemon.tier}`);
+
     if (pokemon.baseSpecies !== pokemon.species){
       sendMsg.push(`Base species: ${pokemon.baseSpecies}`);
     }
