@@ -3,7 +3,7 @@
 const path = require('path');
 const http = require('http');
 
-const SPRITE_URL = 'http://play.pokemonshowdown.com/sprites/';
+const SPRITE_URL = 'https://play.pokemonshowdown.com/sprites/';
 
 module.exports = {
   desc: "Image link of a Pokémon, or link to sprite directory if no argument is given. Uses PokemonShowdown's sprite library.",
@@ -37,7 +37,7 @@ module.exports = {
   hasCustomFormatting: true,
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
-      return "```PokemonShowdown's sprite directory:``` http://play.pokemonshowdown.com/sprites/";
+      return "```PokemonShowdown's sprite directory:``` https://play.pokemonshowdown.com/sprites/";
     }
 
     let pokemon = dex.getTemplate(msg[0]);
