@@ -1,3 +1,7 @@
+### 3.1.14 - 2019-11-18
+ * Update bot to support gen 8 (use `//updatedb` to pull data changes from Showdown)
+ * `//filter` now notes the number of Pokemon matched
+
 ### 3.1.13 - 2019-10-06
  * Add tier information to non-verbose dex call
  * Remove weight information from non-verbose dex call

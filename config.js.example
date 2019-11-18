@@ -26,4 +26,4 @@ module.exports.defaultPresence = {
   'game': `${module.exports.dexCommandPrefix}${module.exports.helpCommand}`
 };
 
-module.exports.defaultGen = 7;
+module.exports.defaultGen = 8;
