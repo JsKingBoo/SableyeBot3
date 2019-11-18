@@ -413,7 +413,7 @@ module.exports = {
       let fitsIndex = parseInt(fits[i]);
       if (!speciesMatch[fitsIndex]) { continue; }
       verifyMatch = true;
-      sendMsg.push(`Pokémon that satisfy ${fitsIndex} parameter${fitsIndex === 1 ? '' : 's'}: (${speciesMatch[fitsIndex]})`);
+      sendMsg.push(`Pokémon that satisfy ${fitsIndex} parameter${fitsIndex === 1 ? '' : 's'}: (${speciesMatch[fitsIndex].length})`);
       for (let sortIndex = 0; sortIndex < sortParameters.length; sortIndex++) {
         let sorter = sortParameters[sortIndex];
         speciesMatch[fitsIndex].sort(function(aa, bb) {
