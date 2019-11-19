@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const http = require('http');
+const https = require('https');
 
 const SPRITE_URL = 'https://play.pokemonshowdown.com/sprites/';
 
@@ -55,9 +55,6 @@ module.exports = {
 
     let spriteId = pokemon.spriteid;
     let genNum = dex.gen;
-    if (flags.noani && genNum >= 6) {
-      genNum = 5;
-    }
     if (pokemon.tier === 'CAP') {
       genNum = 5;
     }
@@ -65,12 +62,15 @@ module.exports = {
       genNum = 1;
     }
 
-    let genData = {1:'rby', 2:'gsc', 3:'rse', 4:'dpp', 5:'bw', 6:'xy', 7:'xy'}[genNum];
+    let genData = {1:'gen1', 2:'gen2', 3:'gen3', 4:'gen4', 5:'gen5', 6:'', 7:'', 8:''}[genNum];
     let ending = '.png';
     if (!flags.noani && genNum >= 5 && pokemon.num > 0) {
       genData += 'ani';
       ending = '.gif';
     }
+    if (flags.noani && genNum >= 7 && !flags.back) {
+      genData = "dex";
+    }      
 
     let dir = '';
     let facing = 'front';
@@ -88,10 +88,13 @@ module.exports = {
     }
 
     dir = genData + dir;
+    if (dir === "") {
+      dir = "gen6";
+    }
 
     if (flags.female && genNum >= 4) {
       let checker = new Promise((resolve, reject) => {
-        let req = http.request({'host': 'play.pokemonshowdown.com',
+        let req = https.request({'host': 'play.pokemonshowdown.com',
             'method': 'HEAD',
             'path': `${SPRITE_URL}${dir}/${spriteId}-f${ending}`
         });

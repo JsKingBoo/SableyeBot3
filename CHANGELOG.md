@@ -1,3 +1,7 @@
+### 3.1.15 - 2019-11-18
+ * Directly leech off of Showdown's repository instead of cherrypicking a few files (lol)
+ * Band-aid fix `//sprite` while we wait for more gen 8 data
+
 ### 3.1.14 - 2019-11-18
  * Update bot to support gen 8 (use `//updatedb` to pull data changes from Showdown)
  * `//filter` now notes the number of Pokemon matched

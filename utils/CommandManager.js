@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const Commands = require('./Commands.js');
-const Dex = require('./dex.js');
+const Dex = require('../pokemon-showdown/.sim-dist/dex.js').Dex;
 const Flag = require('./Flag.js');
 const FCManager = require('./FCManager.js');
 

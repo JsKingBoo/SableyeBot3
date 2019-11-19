@@ -2,9 +2,6 @@
 
 const path = require('path');
 const fs = require('fs');
-const dex = require(path.resolve(__dirname, '../../utils/dex.js'));
-
-const minidex = require(path.resolve(__dirname, '../../data/pokedex-mini.js'))['BattlePokemonSprites'];
 
 const hdSpritePath = path.resolve(__dirname, '../../sprites/');
 
@@ -24,7 +21,7 @@ module.exports = {
     desc: "Enables female variant, if available."
   }],
   hasCustomFormatting: true,
-  process: async function(msg, flags) {
+  process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;
     }
