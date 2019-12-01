@@ -10,7 +10,7 @@ const db = new Loki(fullDbPath, {
   autosave: false
 });
 
-const gamesList = {'b': 1, 'w': 1, 'b2': 1, 'w2': 1, 'x': 1, 'y': 1, 'or': 1, 'as': 1, 's': 1, 'm': 1, 'us': 1, 'um': 1, 'sw': 1, 'sh': 1};
+const gamesList = {'b': 1, 'w': 1, 'b2': 1, 'w2': 1, 'x': 1, 'y': 1, 'or': 1, 'as': 1, 's': 1, 'm': 1, 'us': 1, 'um': 1, 'lgp': 1, 'lge': 1, 'sw': 1, 'sh': 1};
 
 class FriendCode {
   constructor(discordID) {

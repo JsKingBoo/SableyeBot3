@@ -1,3 +1,6 @@
+### 3.1.16 - 2019-11-30
+ * Add Let's Go, Pikachu! and Let's Go, Eevee! to `//addgame`
+
 ### 3.1.15 - 2019-11-18
  * Directly leech off of Showdown's repository instead of cherrypicking a few files (lol)
  * Band-aid fix `//sprite` while we wait for more gen 8 data

@@ -16,6 +16,8 @@ module.exports = {
     " - Moon: M",
     " - Ultra Sun: US",
     " - Ultra Moon: UM",
+    " - Let's Go, Pikachu!: LGP",
+    " - Let's Go, Eevee!: LGE",
     " - Sword: SW",
     " - Shield: SH",
     "TSV stands for Trainer Shiny Value and is used to determine whether a Pokémon egg hatches a shiny."
