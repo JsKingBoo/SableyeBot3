@@ -8,7 +8,7 @@ let sourceNames = {
   D:"dream world",
   S:"event", 
   L:"level up", 
-  M:"TM/HM", 
+  M:"TM, HM or TR",
   T:"tutor", 
   X:"egg, traded back", 
   Y:"event, traded back", 
