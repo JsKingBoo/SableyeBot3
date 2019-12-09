@@ -1,6 +1,7 @@
 ### 3.1.17 - 2019-12-09
  * Make the `//filter` command search Sword/Shield-legal Pokemon by default and include a `--natdex` option to revert to the old behaviour.
  * Add TRs to the `//learn` command's text for TMs/HMs/TRs.
+ * Removed the `--alola` flag for the `//filter` command.
 
 ### 3.1.16 - 2019-11-30
  * Add Let's Go, Pikachu! and Let's Go, Eevee! to `//addgame`
