@@ -78,7 +78,7 @@ function getEffectiveness(defending, attacking, dex) {
   }
 }
 
-function getPokemonProperty(pokemon, property, dex) {
+function getPokemonProperty(pokemon, property, dex, flags) {
   switch (property) {
   case 'num': return pokemon.num;
   case 'species': 
@@ -93,7 +93,7 @@ function getPokemonProperty(pokemon, property, dex) {
     return pokemon.types;
   case 'monotype':  
     return (pokemon.types.length === 1 ? alphanumeric(pokemon.types[0]) : null);
-  case 'move': return new Learnset(pokemon, dex).movesArray();
+  case 'move': return new Learnset(pokemon, dex).movesArray(!flags.vgc);
   case 'hp':
   case 'health':
     return pokemon.baseStats.hp;
@@ -201,7 +201,7 @@ module.exports = {
     {
       name: "vgc",
       value: false,
-      desc: "Only consider Pokémon that are legal in a National Pokedex VGC format."
+      desc: "Only consider Pokémon and moves that are legal in a National Pokedex VGC format."
     },
     {
       name: "natdex",
@@ -348,7 +348,7 @@ module.exports = {
       let fitParameters = 0;
       for (let parameterIndex = 0; parameterIndex < parameterList.length; parameterIndex++) {
         let parameter = parameterList[parameterIndex];
-        let pokemonProperty = getPokemonProperty(template, parameter.key, dex);
+        let pokemonProperty = getPokemonProperty(template, parameter.key, dex, flags);
         if (pokemonProperty === null) {
           continue;
         }
@@ -412,8 +412,8 @@ module.exports = {
       for (let sortIndex = 0; sortIndex < sortParameters.length; sortIndex++) {
         let sorter = sortParameters[sortIndex];
         speciesMatch[fitsIndex].sort(function(aa, bb) {
-          let a = getPokemonProperty(dex.getTemplate(aa), sorter.value, dex);
-          let b = getPokemonProperty(dex.getTemplate(bb), sorter.value, dex);
+          let a = getPokemonProperty(dex.getTemplate(aa), sorter.value, dex, flags);
+          let b = getPokemonProperty(dex.getTemplate(bb), sorter.value, dex, flags);
           if (typeof a === "number" || typeof b === "number") {
             return b - a;
           } else if (typeof a === "string" || typeof b === "string") {

@@ -113,10 +113,12 @@ class Learnset {
     return false;
   }
   
-  movesArray() {
+  movesArray(transfer = true) {
     let arr = [];
     for (let i = 0; i < this.learnset.length; i++){
-      arr.push(this.learnset[i].name);
+      if (transfer || this.learnset[i].gen === this.gen) {
+        arr.push(this.learnset[i].name);
+      }
     }
     return arr;
   }
