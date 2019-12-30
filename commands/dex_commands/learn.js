@@ -29,6 +29,16 @@ module.exports = {
     name: "cap",
     value: false,
     desc: "Includes non-canon Pokémon."
+  },
+  {
+    name: "vgc",
+    value: false,
+    desc: "Exclude moveds leaned in previous generations."
+  },
+  {
+    name: "natdex",
+    value: false,
+    desc: "Consider the entire National Pokedex.  Only applicable for //learn <move name>."
   }],
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
@@ -86,6 +96,9 @@ module.exports = {
         if (moveEntry.gen > dex.gen) {
           continue;
         }
+        if (flags.vgc && moveEntry.gen != dex.gen) {
+          continue;
+        }
         if (moveEntry.name === 'sketch') {
           sketch = true;
         }
@@ -93,9 +106,10 @@ module.exports = {
       }
       
       let listMoves = Object.keys(moveNames).sort();
-      if (!listMoves) {
-        //?
-        return `${pokemon.name} cannot learn any moves.`;
+      if (listMoves.length === 0) {
+        // --vgc flag is on, gen is 8+ and the pokemon got snapped.
+        // PS's dataset doesn't have dex data so we only know now.
+        return `${pokemon.name} is not present in Generation ${dex.gen}.`;
       }
       sendMsg.push(`${pokemon.name}'s learnset:`);
       sendMsg.push(listMoves.join(", "));
@@ -109,14 +123,18 @@ module.exports = {
         if (!flags.cap && dex.data.Pokedex[allMons[i]].num <= 0) {
           continue;
         }
-        let monset = new Learnset(dex.getTemplate(allMons[i]), dex);
-        if (monset.canHaveMove(move.id, dex.gen)) {
+        let template = dex.getTemplate(allMons[i])
+        if (!flags.natdex && template.tier === "Illegal") {
+          continue;
+        }
+        let monset = new Learnset(template, dex);
+        if (monset.canHaveMove(move.id, dex.gen, !flags.vgc)) {
           validMons.push(dex.data.Pokedex[allMons[i]].species);
         }
       }
       sendMsg.push(`Pokémon that can learn ${move.name}:`);
       sendMsg.push(validMons.join(", "));
-    } else if (pokemon && move) {   
+    } else if (pokemon && move) {
       let search = learnset.findMove(move.id, (!flags.verbose ? dex.gen : null));
       if (search.length === 0 && !flags.verbose) {
         search = learnset.findMove(move.id, null);

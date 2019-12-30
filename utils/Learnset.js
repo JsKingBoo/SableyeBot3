@@ -92,13 +92,23 @@ class Learnset {
     return moves;
   }
   
-  canHaveMove(moveid, gen = null) {
+  canHaveMove(moveid, gen = null, transfer = true) {
     for (let i = 0; i < this.learnset.length; i++){
-      if (this.learnset[i].name === moveid) {
-        if (!gen || this.learnset[i].gen <= gen) {
-          return true;
+      if (this.learnset[i].name !== moveid) {
+        continue;
+      }
+      if (gen && this.learnset[i].gen > gen) {
+        continue;
+      }
+      if (!transfer) {
+        if (gen && this.learnset[i].gen != gen) {
+          continue;
+        }
+        if (!gen && this.learnset[i].gen != this.gen) {
+          continue;
         }
       }
+      return true;
     }
     return false;
   }
