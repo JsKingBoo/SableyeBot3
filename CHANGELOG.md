@@ -1,3 +1,9 @@
+### 3.1.18 - 2019-12-30
+ * Make the `//filter` command check VGC legality of Pokemon/Move combinations when supplied with `--vgc`.
+ * Add the following flags to `//learn`:
+   * `--vgc`: Excludes transfer-only Moves/Pokemon from `//learn <move>` and `//learn <Pokemon>`.
+   * `--natdex`: Search the entire National Pokedex - listing Sword/Shield-legal Pokemon only is the new default behaviour. 
+
 ### 3.1.17 - 2019-12-09
  * Make the `//filter` command search Sword/Shield-legal Pokemon by default and include a `--natdex` option to revert to the old behaviour.
  * Add TRs to the `//learn` command's text for TMs/HMs/TRs.
