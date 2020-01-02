@@ -1,3 +1,7 @@
+### 3.1.19 - 2020-01-03
+ * Allow `//learn` to take multiple moves in the `//learn <Pokemon>[, <Move>]...` form.
+   * This will list the learn method for every move listed for the given Pokemon.
+
 ### 3.1.18 - 2019-12-30
  * Make the `//filter` command check VGC legality of Pokemon/Move combinations when supplied with `--vgc`.
  * Add the following flags to `//learn`:
