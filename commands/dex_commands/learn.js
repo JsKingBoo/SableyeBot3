@@ -76,7 +76,7 @@ module.exports = {
             move = null;
           } else {
             sendMsg.push(`No move ${list[i]} found. Did you mean ${move[0].name}?`);
-            moves.push(dex.getMove(move[0]));
+            moves.push(dex.getMove(move[0].name));
           }
         } else {
           moves.push(move);
