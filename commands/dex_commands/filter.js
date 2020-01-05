@@ -24,9 +24,9 @@ function isMultiValue(obj) {
 
 function multiValueChecker(operator, multiValue, value) {
   /*
-	Iterates through a list to check if it's equal. "=" is treated as OR while "<>" is treated as AND
-	For example, if abilities = [Magic Guard, Unaware] then = will return true when at least one matches, while <> returns false if at least one of them match.
-	*/
+        Iterates through a list to check if it's equal. "=" is treated as OR while "<>" is treated as AND
+        For example, if abilities = [Magic Guard, Unaware] then = will return true when at least one matches, while <> returns false if at least one of them match.
+        */
   value = alphanumeric(value+'');
   let isEqual = operatorCompare[operator](1, 1);
   if (multiValue.constructor === [].constructor) {
@@ -80,65 +80,65 @@ function getEffectiveness(defending, attacking, dex) {
 
 function getPokemonProperty(pokemon, property, dex, flags) {
   switch (property) {
-  case 'num': return pokemon.num;
-  case 'species': 
-  case 'name':
-  case 'speciesid':
-    return pokemon.speciesid;
-  case 'basespecies': return dex.getTemplate(pokemon.baseSpecies).speciesid;
-  case 'gen': return pokemon.gen;
-  case 'ability': return pokemon.abilities;
-  case 'type': 
-  case 'types':
-    return pokemon.types;
-  case 'monotype':  
-    return (pokemon.types.length === 1 ? alphanumeric(pokemon.types[0]) : null);
-  case 'move': return new Learnset(pokemon, dex).movesArray(!flags.vgc);
-  case 'hp':
-  case 'health':
-    return pokemon.baseStats.hp;
-  case 'atk':
-  case 'attack':
-    return pokemon.baseStats.atk;
-  case 'def':
-  case 'defense':
-    return pokemon.baseStats.def;
-  case 'spa':
-  case 'specialattack':
-    return pokemon.baseStats.spa;
-  case 'spd':
-  case 'specialdefense':
-    return pokemon.baseStats.spd;
-  case 'spe':
-  case 'speed':
-    return pokemon.baseStats.spe;
-  case 'bst': return pokemon.baseStats.hp + pokemon.baseStats.atk + pokemon.baseStats.def + pokemon.baseStats.spa + pokemon.baseStats.spd + pokemon.baseStats.spe;
-  case 'prevo': return pokemon.prevo || null;
-  case 'evos': return pokemon.evos;
-  case 'hasprevo': return !!pokemon.prevo;
-  case 'hasevo': 
-  case 'nfe':
-    return (pokemon.evos.length > 0);
-  case 'evolevel': return pokemon.evoLevel || null;
-  case 'heightm':
-  case 'height':
-    return pokemon.heightm;
-  case 'weightkg':
-  case 'weight':
-    return pokemon.weightkg;
-  case 'bmi': return Math.round(pokemon.weightkg/(pokemon.heightm*pokemon.heightm));
-  case 'color': return pokemon.color.toLowerCase();
-  case 'egggroups':
-  case 'egggroup':
-  case 'egg':
-    return pokemon.eggGroups;
-  case 'forme': return pokemon.forme.toLowerCase();
-  case 'formeletter': return pokemon.formeLetter.toLowerCase();
-  case 'otherformes': return pokemon.otherFormes;
-  case 'otherforms': return pokemon.otherForms;
-  case 'tier': return pokemon.tier.toLowerCase();
-  case 'resist': return '*';
-  default: return null;
+    case 'num': return pokemon.num;
+    case 'species':
+    case 'name':
+    case 'speciesid':
+      return pokemon.speciesid;
+    case 'basespecies': return dex.getTemplate(pokemon.baseSpecies).speciesid;
+    case 'gen': return pokemon.gen;
+    case 'ability': return pokemon.abilities;
+    case 'type':
+    case 'types':
+      return pokemon.types;
+    case 'monotype':
+      return (pokemon.types.length === 1 ? alphanumeric(pokemon.types[0]) : null);
+    case 'move': return new Learnset(pokemon, dex).movesArray(!flags.vgc);
+    case 'hp':
+    case 'health':
+      return pokemon.baseStats.hp;
+    case 'atk':
+    case 'attack':
+      return pokemon.baseStats.atk;
+    case 'def':
+    case 'defense':
+      return pokemon.baseStats.def;
+    case 'spa':
+    case 'specialattack':
+      return pokemon.baseStats.spa;
+    case 'spd':
+    case 'specialdefense':
+      return pokemon.baseStats.spd;
+    case 'spe':
+    case 'speed':
+      return pokemon.baseStats.spe;
+    case 'bst': return pokemon.baseStats.hp + pokemon.baseStats.atk + pokemon.baseStats.def + pokemon.baseStats.spa + pokemon.baseStats.spd + pokemon.baseStats.spe;
+    case 'prevo': return pokemon.prevo || null;
+    case 'evos': return pokemon.evos;
+    case 'hasprevo': return !!pokemon.prevo;
+    case 'hasevo':
+    case 'nfe':
+      return (pokemon.evos.length > 0);
+    case 'evolevel': return pokemon.evoLevel || null;
+    case 'heightm':
+    case 'height':
+      return pokemon.heightm;
+    case 'weightkg':
+    case 'weight':
+      return pokemon.weightkg;
+    case 'bmi': return Math.round(pokemon.weightkg/(pokemon.heightm*pokemon.heightm));
+    case 'color': return pokemon.color.toLowerCase();
+    case 'egggroups':
+    case 'egggroup':
+    case 'egg':
+      return pokemon.eggGroups;
+    case 'forme': return pokemon.forme.toLowerCase();
+    case 'formeletter': return pokemon.formeLetter.toLowerCase();
+    case 'otherformes': return pokemon.otherFormes;
+    case 'otherforms': return pokemon.otherForms;
+    case 'tier': return pokemon.tier.toLowerCase();
+    case 'resist': return '*';
+    default: return null;
   }
 }
 
@@ -214,27 +214,27 @@ module.exports = {
     if (msg.length === 0) {
       return null;
     }
-		
+
     let parameterList = [];
     let sortParameters = [];
     let threshholdObject = undefined;
     let sendMsg = [];
-		
-    //Parse parameters    
+
+    //Parse parameters
     let alphabet = 'qwertyuiopasdfghjklzxcvbnm'.split('');
     let validKeyChars = {};
     let validOperatorChars = {'=': 1, '<': 1, '>': 1, '!': 1};
     for (let i = 0; i < alphabet.length; i++) {
       validKeyChars[alphabet[i]] = 1;
     }
-    
+
     for (let parameterIndex = 0; parameterIndex < msg.length; parameterIndex++) {
       let parameter = msg[parameterIndex];
       let parameterTemplate = {'key': '', 'value': '', 'operator': '', 'hasCustomParsing': false, 'verified': false };
       let valid = -1;
       let charIndex = 0;
       let charAtIndex = parameter.charAt(charIndex);
-      
+
       while (validKeyChars[charAtIndex]) {
         parameterTemplate.key += charAtIndex;
         charIndex++;
@@ -247,7 +247,7 @@ module.exports = {
       if (parameterTemplate.key.length === 0) {
         valid = 1;
       }
-			
+
       while (validOperatorChars[charAtIndex] && valid < 0) {
         parameterTemplate.operator += charAtIndex;
         charIndex++;
@@ -260,7 +260,7 @@ module.exports = {
       if (!operatorCompare[parameterTemplate.operator] && valid < 0) {
         valid = 2;
       }
-			
+
       parameterTemplate.value = parameter.slice(charIndex);
       if (parameterTemplate.value.length === 0 && valid < 0) {
         valid = 3;
@@ -275,30 +275,30 @@ module.exports = {
       } else if (truthyValues[parameterTemplate.value]) {
         parameterTemplate.value = true;
       }
-			
+
       if (valid > 0) {
         let errorMessage = "";
         switch (valid) {
-        case 3:
-          errorMessage = "Argument value not given.";
-          break;
-        case 2:
-          errorMessage = "Argument operator not found.";
-          break;
-        case 1:
-        default:
-          errorMessage = "Argument key not valid.";
-          break;
+          case 3:
+            errorMessage = "Argument value not given.";
+            break;
+          case 2:
+            errorMessage = "Argument operator not found.";
+            break;
+          case 1:
+          default:
+            errorMessage = "Argument key not valid.";
+            break;
         }
         sendMsg.push(`Ignoring argument "[${parameterIndex+1}] ${parameter}" due to parsing error: ${errorMessage}`);
         continue;
       }
-			
+
       let customs = {'threshold': 1, 'sort': 1};
       if (customs[parameterTemplate.key]) {
         parameterTemplate.hasCustomParsing = true;
       }
-      
+
       if (parameterTemplate.key === 'threshold' && threshholdObject === undefined) {
         threshholdObject = parameterTemplate;
         threshholdObject.value = parseInt(threshholdObject.value);
@@ -310,19 +310,19 @@ module.exports = {
       } else {
         parameterList.push(parameterTemplate);
         sendMsg.push(`[${(parameterIndex+1)}] ${parameterTemplate.key}${parameterTemplate.operator}${parameterTemplate.value}`);
-      }			
+      }
     }
-		
+
     sendMsg.push("~~");
-    
+
     if (parameterList.length === 0) {
       sendMsg.push("No valid arguments given.");
       return sendMsg;
     }
-    
+
     //Iterate through all Pokémon, then place them in buckets determined by how many parameters they satisfy
     let speciesMatch = {};
-    let maxMatches = -1;   
+    let maxMatches = -1;
     for (let pokemon in dex.data.Pokedex) {
       let template = dex.getTemplate(pokemon);
       if (!flags.cap && template.num <= 0) {
@@ -344,7 +344,7 @@ module.exports = {
       if (template.gen > dex.gen) {
         continue;
       }
-      
+
       let fitParameters = 0;
       for (let parameterIndex = 0; parameterIndex < parameterList.length; parameterIndex++) {
         let parameter = parameterList[parameterIndex];
@@ -368,23 +368,23 @@ module.exports = {
           fitParameters++;
         }
       }
-      
+
       if (!threshholdObject || operatorCompare[threshholdObject.operator](fitParameters, threshholdObject.value)) {
         if (!speciesMatch[fitParameters]) {
           speciesMatch[fitParameters] = [];
         }
         speciesMatch[fitParameters].push(template.name);
         maxMatches = Math.max(maxMatches, fitParameters);
-      }			
+      }
     }
-		
+
     for (let parameterIndex = 0; parameterIndex < parameterList.length; parameterIndex++) {
       let parameter = parameterList[parameterIndex];
       if (!parameter.verified) {
         sendMsg.push(`WARNING: Could not verify that ${parameter.key}${parameter.operator}${parameter.value} is valid.`);
       }
     }
-        
+
     if (!threshholdObject) {
       if (!flags.verbose) {
         for (let i in speciesMatch) {
@@ -396,12 +396,18 @@ module.exports = {
       } else if (Object.keys(speciesMatch).length > 1) {
         speciesMatch[0] = null;
       }
-      
+
       if (maxMatches != parameterList.length) {
-        sendMsg.push("No Pokémon that satisfies ALL parameters found.");
+        sendMsg.push("No Pokémon that satisfies all parameters found.");
+        if (maxMatches > 0) {
+          sendMsg.push("Use \"//filter " + msg.join(", ") + " --threshold="
+            + maxMatches + "\" (without quotes) to get all pokemon that match "
+            + maxMatches + " of the parameters.");
+          return sendMsg;
+        }
       }
     }
-    
+
     let verifyMatch = false;
     let fits = Object.keys(speciesMatch).sort((a, b) => { return b - a; });
     for (let i = 0; i < fits.length; i++) {
@@ -429,9 +435,9 @@ module.exports = {
     if (!verifyMatch) {
       sendMsg[sendMsg.length - 1] = "No Pokémon satisfy the search criteria";
     }
-    
+
     return sendMsg;
-    
+
   }
 };
 
