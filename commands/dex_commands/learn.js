@@ -33,12 +33,12 @@ module.exports = {
   {
     name: "vgc",
     value: false,
-    desc: "Exclude moveds leaned in previous generations."
+    desc: "Exclude moves learned in previous generations."
   },
   {
     name: "natdex",
     value: false,
-    desc: "Consider the entire National Pokedex.  Only applicable for //learn <move name>."
+    desc: "Consider the entire National Pokedex. Only applicable for //learn <move name>."
   }],
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
