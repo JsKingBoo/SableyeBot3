@@ -18,7 +18,7 @@ fcm.init();
 class CommandManager {
   constructor() {
     this.commands = [];
-    Dex.includeModData();    
+    // Dex.includeModData();    
   }
   
   async init() {
