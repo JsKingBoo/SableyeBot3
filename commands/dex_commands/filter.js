@@ -393,7 +393,7 @@ module.exports = {
           }
         }
         speciesMatch[0] = null;
-      } else if (Object.keys(speciesMatch).length > 1) {
+      } else {
         speciesMatch[0] = null;
       }
 
