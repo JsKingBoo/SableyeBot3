@@ -393,13 +393,13 @@ module.exports = {
           }
         }
         speciesMatch[0] = null;
-      } else if (Object.keys(speciesMatch).length > 1) {
+      } else {
         speciesMatch[0] = null;
       }
 
       if (maxMatches != parameterList.length) {
         sendMsg.push("No Pokémon that satisfies all parameters found.");
-        if (maxMatches > 0) {
+        if (maxMatches > 0 && !flags.verbose) {
           sendMsg.push("Use \"//filter " + msg.join(", ") + " --threshold="
             + maxMatches + "\" (without quotes) to get all pokemon that match "
             + maxMatches + " of the parameters.");
