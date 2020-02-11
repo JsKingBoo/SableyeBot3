@@ -33,7 +33,7 @@ module.exports = {
     }
 
     let zStr = "";
-    if (dex.gen >= 7 || dex.gen === 0) {
+    if (dex.gen === 7 || dex.gen === 0) {
       if (move.isZ) {
         zStr = `(${dex.getItem(move.isZ).name})`;
       } else if (move.zMoveEffect) {
@@ -51,10 +51,23 @@ module.exports = {
       }
       zStr = " " + zStr;
     }
-    
+
+    let dStr = "";
+    if (dex.gen >= 8 || dex.gen === 0) {
+      // Yikes @ this method but there's no field to help otherwise.
+      if (move.name.startsWith('G-Max')) {
+        dStr = "";
+      } else if (move.gmaxPower === 0) {
+        dStr = "(Max Guard)";
+      } else {
+        dStr = `(Max Power: ${move.gmaxPower})`;
+      }
+      dStr = " " + dStr;
+    }
+
     sendMsg = sendMsg.concat([
       `${move.name} [${move.type}] [${move.category}]`,
-      `Power: ${move.basePower}${zStr}; Accuracy: ${move.accuracy}; PP: ${move.pp} (max ${Math.floor(move.pp * 1.6)})`,
+      `Power: ${move.basePower}${zStr}${dStr}; Accuracy: ${move.accuracy}; PP: ${move.pp} (max ${Math.floor(move.pp * 1.6)})`,
       `${(move.desc || move.shortDesc)}`,
       `Priority: ${((move.priority > 0) ? "+" : "")}${move.priority}`
     ]);
