@@ -400,7 +400,7 @@ module.exports = {
       if (maxMatches != parameterList.length) {
         sendMsg.push("No Pokémon that satisfies all parameters found.");
         if (maxMatches > 0 && !flags.verbose) {
-          sendMsg.push("Use \"//filter " + msg.join(", ") + " --threshold="
+          sendMsg.push("Use \"//filter " + msg.join(", ") + ", threshold="
             + maxMatches + "\" (without quotes) to get all pokemon that match "
             + maxMatches + " of the parameters.");
           return sendMsg;
