@@ -12,7 +12,7 @@ module.exports = {
     }
     
     let sendMsg = [];
-    let pokemon = dex.getTemplate(msg[0]);
+    let pokemon = dex.getSpecies(msg[0]);
     let eventId = (msg.length > 1 ? parseInt(msg[1]) : -1);
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex']);
@@ -20,7 +20,7 @@ module.exports = {
         return `No Pokémon ${msg[0]} found.`;
       }
       sendMsg.push(`No Pokémon ${msg[0]} found. Did you mean ${pokemon[0].name}?`);
-      pokemon = dex.getTemplate(pokemon[0].name);
+      pokemon = dex.getSpecies(pokemon[0].name);
     }
     if (pokemon.gen > dex.gen) {
       return `${pokemon.species} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.`;
@@ -69,9 +69,3 @@ module.exports = {
 		
   }
 };
-
-
-
-
-
-

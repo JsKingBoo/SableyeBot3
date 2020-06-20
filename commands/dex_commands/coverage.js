@@ -39,7 +39,7 @@ module.exports = {
     let types = Object.keys(dex.data.TypeChart);
     let attackTyping = [];
     
-    let pokemon = dex.getTemplate(msg[0]);
+    let pokemon = dex.getSpecies(msg[0]);
     if (!pokemon || !pokemon.exists || pokemon.gen > dex.gen) {
       pokemon = {name: '-'};
       for (let i = 0; i < Math.min(msg.length, 4); i++) {

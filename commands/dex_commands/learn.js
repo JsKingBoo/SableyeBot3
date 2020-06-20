@@ -46,7 +46,7 @@ module.exports = {
     }
     let sendMsg = [];
 
-    let pokemon = dex.getTemplate(msg[0]);
+    let pokemon = dex.getSpecies(msg[0]);
     let moves = [];
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex', 'Movedex']);
@@ -59,7 +59,7 @@ module.exports = {
         }
       } else {
         sendMsg.push(`No Pokémon ${msg[0]} found. Did you mean ${pokemon[0].name}?`);
-        pokemon = dex.getTemplate(pokemon[0].name);
+        pokemon = dex.getSpecies(pokemon[0].name);
       }
     }
     if (pokemon && pokemon.gen > dex.gen && !flags.verbose) {
@@ -129,7 +129,7 @@ module.exports = {
         if (!flags.cap && dex.data.Pokedex[allMons[i]].num <= 0) {
           continue;
         }
-        let template = dex.getTemplate(allMons[i])
+        let template = dex.getSpecies(allMons[i])
         if (!flags.natdex && template.tier === "Illegal") {
           continue;
         }
