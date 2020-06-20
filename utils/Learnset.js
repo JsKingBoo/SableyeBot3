@@ -6,7 +6,7 @@ class Learnset {
 
   constructor (pokemon, dex) {
     if (typeof pokemon === 'string') {
-      pokemon = dex.getTemplate(pokemon);
+      pokemon = dex.getSpecies(pokemon);
     }
     
     this.pokemon = pokemon.speciesid;
@@ -27,7 +27,7 @@ class Learnset {
       //Does not have its own learnset (e.g. Mega form); take from base
       if (!pokemon.learnset) {
         if (pokemon.baseSpecies !== pokemon.species) {
-          pokemon = dex.getTemplate(pokemon.baseSpecies);
+          pokemon = dex.getSpecies(pokemon.baseSpecies);
           srcMon = 'base species';
           continue;
         }
@@ -59,15 +59,15 @@ class Learnset {
       }
       
       if (pokemon.species === 'Lycanroc-Dusk') {
-        pokemon = dex.getTemplate('Rockruff-Dusk');
+        pokemon = dex.getSpecies('Rockruff-Dusk');
       } else if (pokemon.prevo) {
-        pokemon = dex.getTemplate(pokemon.prevo);
+        pokemon = dex.getSpecies(pokemon.prevo);
         srcMon = 'prevo';
         if (pokemon.gen > this.gen) {
           pokemon = null;
         }
       } else if (pokemon.baseSpecies && pokemon.baseSpecies === 'Rotom') {
-        pokemon = dex.getTemplate(pokemon.baseSpecies);
+        pokemon = dex.getSpecies(pokemon.baseSpecies);
         srcMon = 'base species';
       } else {
         pokemon = null;

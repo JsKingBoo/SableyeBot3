@@ -25,18 +25,19 @@ module.exports = {
     }
     let sendMsg = [];
     
-    let pokemon = dex.getTemplate(msg[0]);
+    let pokemon = dex.getSpecies(msg[0]);
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex']);
       if (!pokemon) {
         return `No Pokémon ${msg[0]} found.`;
       }
       sendMsg.push(`No Pokémon ${msg[0]} found. Did you mean ${pokemon[0].name}?`);
-      pokemon = dex.getTemplate(pokemon[0].name);
+      pokemon = dex.getSpecies(pokemon[0].name);
     }
     if (pokemon.gen > dex.gen) {
-      return `${pokemon.species} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.`;
+      return `${pokemon.name} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.`;
     }
+    console.log(pokemon)
      
     // Must check ability compatibility
     let abilitiesStr = 'Ability: <none>';
@@ -54,7 +55,7 @@ module.exports = {
     let bstStr = (flags.verbose ? ` [BST: ${(pokemon.baseStats.hp + pokemon.baseStats.atk + pokemon.baseStats.spa + pokemon.baseStats.spe + pokemon.baseStats.def + pokemon.baseStats.spd)}]` : '');
     
     sendMsg = sendMsg.concat([
-      `No. ${pokemon.num}: ${pokemon.species} [${pokemon.types.join('/')}]`,
+      `No. ${pokemon.num}: ${pokemon.name} [${pokemon.types.join('/')}]`,
       `${abilitiesStr}`,
       `HP/ATK/DEF/SPA/SPD/SPE: ${pokemon.baseStats.hp}/${pokemon.baseStats.atk}/${pokemon.baseStats.def}/${pokemon.baseStats.spa}/${pokemon.baseStats.spd}/${pokemon.baseStats.spe}${bstStr}`
     ]);
@@ -69,16 +70,16 @@ module.exports = {
 
     sendMsg.push(`Tier: ${pokemon.tier}`);
 
-    if (pokemon.baseSpecies !== pokemon.species){
+    if (pokemon.baseSpecies !== pokemon.name){
       sendMsg.push(`Base species: ${pokemon.baseSpecies}`);
     }
     
     if (pokemon.otherFormes){
       let otherFormHelper = [];
       for (let i = 0; i < pokemon.otherFormes.length; i++){
-        let otherForme = dex.getTemplate(pokemon.otherFormes[i]);
+        let otherForme = dex.getSpecies(pokemon.otherFormes[i]);
         if (otherForme.gen <= dex.gen) {
-          otherFormHelper.push(otherForme.species);
+          otherFormHelper.push(otherForme.name);
         }
       }
       if (otherFormHelper.length > 0) {
@@ -93,9 +94,9 @@ module.exports = {
       if (pokemon.nfe) {
         let formatEvos = [];
         for (let i = 0; i < pokemon.evos.length; i++){
-          let evo = dex.getTemplate(pokemon.evos[i]);
+          let evo = dex.getSpecies(pokemon.evos[i]);
           if (evo.gen <= dex.gen) {
-            formatEvos.push(evo.species);
+            formatEvos.push(evo.name);
           }
         }
         sendMsg.push(`Evo: ${formatEvos.join(", ")}`);
