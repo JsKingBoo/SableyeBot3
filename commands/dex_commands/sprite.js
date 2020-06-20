@@ -40,17 +40,17 @@ module.exports = {
       return "```PokemonShowdown's sprite directory:``` https://play.pokemonshowdown.com/sprites/";
     }
 
-    let pokemon = dex.getTemplate(msg[0]);
+    let pokemon = dex.getSpecies(msg[0]);
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex']);
       if (!pokemon) {
         return '```' + `No Pokémon ${msg[0]} found.` + '```';
       }
-      pokemon = dex.getTemplate(pokemon[0].name);
+      pokemon = dex.getSpecies(pokemon[0].name);
     }
 
     if (pokemon.gen > dex.gen) {
-      return '```' + `${pokemon.species} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.` + '```';
+      return '```' + `${pokemon.name} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.` + '```';
     }
 
     let spriteId = pokemon.spriteid;
