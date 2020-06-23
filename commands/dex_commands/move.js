@@ -1,7 +1,7 @@
 'use strict';
 			
 let stats = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion'];
-        
+
 module.exports = {
   desc: "Information of a move",
   longDesc: "Gives the type, category, power, Z-crystal effects, accuracy, PP, description, priority, target, generation, viability, contest type, and ability interactions of a move. An accuracy of 'true' means that the move does not perform an accuracy check.",
@@ -16,9 +16,9 @@ module.exports = {
     if (msg.length === 0){
       return null;
     }
-    
+
     let sendMsg = [];
-    
+
     let move = dex.getMove(msg[0]);
     if (!move || !move.exists) {
       move = dex.dataSearch(msg[0], ['Movedex']);
@@ -47,7 +47,7 @@ module.exports = {
         }
         zStr = `(Z: ${zStr.join(",")})`;
       } else {
-        zStr = `(Z: ${move.zMovePower})`;
+        zStr = `(Z: ${move.zMove.basePower})`;
       }
       zStr = " " + zStr;
     }
@@ -60,7 +60,7 @@ module.exports = {
       } else if (move.gmaxPower === 0) {
         dStr = "(Max Guard)";
       } else {
-        dStr = `(Max Power: ${move.gmaxPower})`;
+        dStr = `(Max Power: ${move.maxMove.basePower})`;
       }
       dStr = " " + dStr;
     }
@@ -144,7 +144,7 @@ module.exports = {
       sendMsg.push("~~");
       sendMsg.push(behaviorFlags);
     }
-    
+
     return sendMsg;
 		
   }
