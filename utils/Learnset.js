@@ -9,6 +9,7 @@ class Learnset {
       pokemon = dex.getSpecies(pokemon);
     }
     
+    pokemon.learnset = dex.getLearnsetData(pokemon.id)['learnset'];
     this.pokemon = pokemon.speciesid;
     this.learnset = [];
     this.gen = dex.gen;

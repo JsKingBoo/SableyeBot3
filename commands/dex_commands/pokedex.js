@@ -37,7 +37,6 @@ module.exports = {
     if (pokemon.gen > dex.gen) {
       return `${pokemon.name} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.`;
     }
-    console.log(pokemon)
      
     // Must check ability compatibility
     let abilitiesStr = 'Ability: <none>';
