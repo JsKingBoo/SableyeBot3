@@ -1,3 +1,12 @@
+### 3.1.20 - 2020-06-25
+ * Isle of Armor pokemon added
+ * `//filter` output made more helpful
+ * Remedy typos in `//learn --vgc`
+ * Use the latest Pokemon Showdown data
+ * Fix a bug in `//filter --verbose`
+ * Add Max Move power to `//dt`
+ * Isle of armor data!
+
 ### 3.1.19 - 2020-01-03
  * Allow `//learn` to take multiple moves in the `//learn <Pokemon>[, <Move>]...` form.
    * This will list the learn method for every move listed for the given Pokemon.
