@@ -1,3 +1,7 @@
+### 3.1.21 - 2020-06-30
+ * `//learn` now respects prevos
+ * Probably fixes a lot of other bugs.
+
 ### 3.1.20 - 2020-06-25
  * Isle of Armor pokemon added
  * `//filter` output made more helpful
