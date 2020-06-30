@@ -10,7 +10,7 @@ class Learnset {
     }
     
     pokemon.learnset = dex.getLearnsetData(pokemon.id)['learnset'];
-    this.pokemon = pokemon.speciesid;
+    this.pokemon = pokemon.id;
     this.learnset = [];
     this.gen = dex.gen;
     
@@ -23,11 +23,12 @@ class Learnset {
     let srcMon = 'direct';
     
     do {
-      alreadyChecked[pokemon.speciesid] = true;
+      console.log(pokemon.baseSpecies, pokemon.name);
+      alreadyChecked[pokemon.id] = true;
       
       //Does not have its own learnset (e.g. Mega form); take from base
       if (!pokemon.learnset) {
-        if (pokemon.baseSpecies !== pokemon.species) {
+        if (pokemon.baseSpecies !== pokemon.name) {
           pokemon = dex.getSpecies(pokemon.baseSpecies);
           srcMon = 'base species';
           continue;
@@ -59,21 +60,23 @@ class Learnset {
         }
       }
       
-      if (pokemon.species === 'Lycanroc-Dusk') {
+      if (pokemon.name === 'Lycanroc-Dusk') {
         pokemon = dex.getSpecies('Rockruff-Dusk');
       } else if (pokemon.prevo) {
         pokemon = dex.getSpecies(pokemon.prevo);
+        pokemon.learnset = dex.getLearnsetData(pokemon.id)['learnset'];
         srcMon = 'prevo';
         if (pokemon.gen > this.gen) {
           pokemon = null;
         }
       } else if (pokemon.baseSpecies && pokemon.baseSpecies === 'Rotom') {
         pokemon = dex.getSpecies(pokemon.baseSpecies);
+        pokemon.learnset = dex.getLearnsetData(pokemon.id)['learnset'];
         srcMon = 'base species';
       } else {
         pokemon = null;
       }
-    } while (pokemon && pokemon.species && !alreadyChecked[pokemon.speciesid]);
+    } while (pokemon && pokemon.id && !alreadyChecked[pokemon.id]);
     
     if (!learnsetCache[this.gen]) {
       learnsetCache[this.gen] = {};
