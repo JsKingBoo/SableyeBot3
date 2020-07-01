@@ -57,12 +57,11 @@ module.exports = {
       // Yikes @ this method but there's no field to help otherwise.
       if (move.name.startsWith('G-Max')) {
         dStr = "";
-      } else if (move.gmaxPower === 0) {
-        dStr = "(Max Guard)";
+      } else if (move.maxMove && move.maxMove.basePower) {
+        dStr = ` (Max Power: ${move.maxMove.basePower})`;
       } else {
-        dStr = `(Max Power: ${move.maxMove.basePower})`;
+        dStr = " (Max Guard)";
       }
-      dStr = " " + dStr;
     }
 
     sendMsg = sendMsg.concat([
