@@ -23,7 +23,6 @@ class Learnset {
     let srcMon = 'direct';
     
     do {
-      console.log(pokemon.baseSpecies, pokemon.name);
       alreadyChecked[pokemon.id] = true;
       
       //Does not have its own learnset (e.g. Mega form); take from base
