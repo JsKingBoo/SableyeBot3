@@ -135,7 +135,7 @@ module.exports = {
         }
         let monset = new Learnset(template, dex);
         if (monset.canHaveMove(move.id, dex.gen, !flags.vgc)) {
-          validMons.push(dex.data.Pokedex[allMons[i]].species);
+          validMons.push(dex.data.Pokedex[allMons[i]].name);
         }
       }
       sendMsg.push(`Pokémon that can learn ${move.name}:`);
