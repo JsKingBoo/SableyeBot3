@@ -10,7 +10,7 @@ module.exports = {
     if (msg.length === 0){
       return null;
     }
-    
+
     let sendMsg = [];
     let pokemon = dex.getSpecies(msg[0]);
     let eventId = (msg.length > 1 ? parseInt(msg[1]) : -1);
@@ -25,9 +25,9 @@ module.exports = {
     if (pokemon.gen > dex.gen) {
       return `${pokemon.species} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.`;
     }
-    
-    let eventList = dex.data.FormatsData[pokemon.speciesid].eventPokemon;
-       
+
+    let eventList = dex.data.Learnsets[pokemon.id].eventData;
+
     if (!eventList || eventList.length === 0) {
       return `${pokemon.name} does not have any events.`;
     }
@@ -41,16 +41,16 @@ module.exports = {
     if (eventId < 0) {
       return `${pokemon.name} has ${eventList.length} events. Include the event ID to see specific event details. (0-${eventList.length-1})`;
     }
-    
+
     let eventData = eventList[eventId];
-    
+
     sendMsg = sendMsg.concat([
       `${pokemon.name} (Event ${eventId})`,
       `Gen${eventData.generation}; level ${eventData.level}`,
       `${eventData.pokeball ? dex.getItem(eventData.pokeball).name : "-"}; ${(eventData.gender || "-")}; ${(eventData.nature || "-")}`,
       `Hidden ability: ${eventData.isHidden ? "yes" : "no"}; Shiny: ${eventData.shiny ? "yes" : "no"}`
     ]);
-    
+
     if (eventData.ivs) {
       let IVs = Object.keys(eventData.ivs);
       for (let i = 0; i < IVs.length; i++){
@@ -65,7 +65,7 @@ module.exports = {
     for (let i = 0; i < eventData.moves.length; i++){
       sendMsg.push(` - ${dex.getMove(eventData.moves[i]).name}`);
     }
-    return sendMsg;		
-		
+    return sendMsg;
+
   }
 };
