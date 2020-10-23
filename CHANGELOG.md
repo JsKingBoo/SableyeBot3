@@ -1,3 +1,10 @@
+### 3.1.22 - 2020-10-23
+
+ * Crown Tundra information added.
+ * Fix GMax Issue.
+ * Fix `//learn <move>` bug.
+ * Fix `//event` not working.
+
 ### 3.1.21 - 2020-06-30
  * `//learn` now respects prevos
  * Probably fixes a lot of other bugs.
