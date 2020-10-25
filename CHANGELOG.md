@@ -1,3 +1,7 @@
+### 3.1.23 - 2020-10-26
+
+ * New Crown Tundra learnsets added.
+
 ### 3.1.22 - 2020-10-23
 
  * Crown Tundra information added.
