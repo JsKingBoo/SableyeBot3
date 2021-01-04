@@ -21,7 +21,7 @@ module.exports = {
 
     let move = dex.getMove(msg[0]);
     if (!move || !move.exists) {
-      move = dex.dataSearch(msg[0], ['Movedex']);
+      move = dex.dataSearch(msg[0], ['Moves']);
       if (!move) {
         return `No move ${msg[0]} found.`;
       }

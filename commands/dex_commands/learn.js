@@ -49,7 +49,7 @@ module.exports = {
     let pokemon = dex.getSpecies(msg[0]);
     let moves = [];
     if (!pokemon || !pokemon.exists) {
-      pokemon = dex.dataSearch(msg[0], ['Pokedex', 'Movedex']);
+      pokemon = dex.dataSearch(msg[0], ['Pokedex', 'Moves']);
       if (!pokemon || pokemon[0].searchType === 'move') {
         pokemon = null;
         if (msg.length === 1) {
@@ -71,7 +71,7 @@ module.exports = {
       for (const i in list) {
         let move = dex.getMove(list[i]);
         if (!move || !move.exists) {
-          move = dex.dataSearch(list[i], ['Movedex']);
+          move = dex.dataSearch(list[i], ['Moves']);
           if (!move) {
             move = null;
           } else {
