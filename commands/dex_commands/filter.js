@@ -142,7 +142,7 @@ function getPokemonProperty(pokemon, property, dex, flags) {
   }
 }
 
-const gbuBanlist = {"Mewtwo":1, "Mew":2, "Lugia":1, "Ho-Oh":1, "Celebi":2, "Kyogre":1, "Groudon":1, "Rayquaza":1, "Jirachi":2, "Deoxys":2, "Dialga":1, "Palkia":1, "Giratina":1, "Phione":2, "Manaphy":2, "Darkrai":2, "Shaymin":2, "Arceus":2, "Victini":2, "Reshiram":1, "Zekrom":1, "Kyurem":1, "Keldeo":2, "Meloetta":2, "Genesect":2, "Greninja-Ash":2, "Xerneas":1, "Yveltal":1, "Zygarde":1, "Diancie":2, "Hoopa":2, "Volcanion":2, "Cosmog":1, "Cosmoem":1, "Solgaleo":1, "Lunala":1, "Necrozma":1, "Magearna":2, "Marshadow":2, "Zeraora":2, "Meltan":2, "Melmetal":2, "Zacian":1, "Zamazenta":1, "Eternatus":1};
+const gbuBanlist = {"Mewtwo":1, "Mew":2, "Lugia":1, "Ho-Oh":1, "Celebi":2, "Kyogre":1, "Groudon":1, "Rayquaza":1, "Jirachi":2, "Deoxys":2, "Dialga":1, "Palkia":1, "Giratina":1, "Phione":2, "Manaphy":2, "Darkrai":2, "Shaymin":2, "Arceus":2, "Victini":2, "Reshiram":1, "Zekrom":1, "Kyurem":1, "Keldeo":2, "Meloetta":2, "Genesect":2, "Greninja-Ash":2, "Xerneas":1, "Yveltal":1, "Zygarde":1, "Diancie":2, "Hoopa":2, "Volcanion":2, "Cosmog":1, "Cosmoem":1, "Solgaleo":1, "Lunala":1, "Necrozma":1, "Magearna":2, "Marshadow":2, "Zeraora":2, "Meltan":2, "Melmetal":2, "Zacian":1, "Zamazenta":1, "Eternatus":1, "Zarude": 2, "Calyrex": 1, "Calyrex-Shadow": 1, "Calyrex-Ice":1};
 
 module.exports = {
   desc: "Search Pokémon based on user-inputted parameters.",
