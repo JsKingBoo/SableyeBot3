@@ -67,8 +67,6 @@ module.exports = {
       sendMsg.push(`Weight: ${pokemon.weightkg}kg (${lowKickCalcs(pokemon.weightkg)} BP); Height: ${pokemon.heightm}m; BMI: ${Math.round((100*pokemon.weightkg)/(pokemon.heightm*pokemon.heightm))/100}`);
     }
 
-    sendMsg.push(`Tier: ${pokemon.tier}`);
-
     if (pokemon.baseSpecies !== pokemon.name){
       sendMsg.push(`Base species: ${pokemon.baseSpecies}`);
     }
