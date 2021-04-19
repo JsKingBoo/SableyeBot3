@@ -18,9 +18,9 @@ fcm.init();
 class CommandManager {
   constructor() {
     this.commands = [];
-    // Dex.includeModData();    
+    // Dex.includeModData();
   }
-  
+
   async init() {
     await Promise.all([
       this.loadDirectory(BOT_CMD_DIR, Commands.BotCommand, config.botCommandPrefix),
@@ -28,38 +28,38 @@ class CommandManager {
       this.loadDirectory(FC_CMD_DIR, Commands.FCCommand, config.fcCommandPrefix),
     ]);
   }
-  
+
   loadDirectory(directory, Command, prefix) {
-     return new Promise((resolve, reject) => {
-			fs.readdir(directory, (err, files) => {
-				if (err) {
-					reject(`Error reading commands directory: ${err}`);
-				} else if (!files) {
-					reject(`No files in directory ${directory}`);
-				} else {
-					for (let name of files) {
-						if (name.endsWith('.js')) {
-							try {
-								name = name.slice(0, -3);
-								let command = new Command(name, prefix, require(directory + '/' + name + '.js'));
-								this.commands.push(command);
-							} catch (e) {
-								console.log(`CommandManager loadDirectory() error: ${e} while parsing ${name}.js in ${directory}`);
-							}
-						}
-					}
-					resolve();
-				}
-			});
-		});
+    return new Promise((resolve, reject) => {
+      fs.readdir(directory, (err, files) => {
+        if (err) {
+          reject(`Error reading commands directory: ${err}`);
+        } else if (!files) {
+          reject(`No files in directory ${directory}`);
+        } else {
+          for (let name of files) {
+            if (name.endsWith('.js')) {
+              try {
+                name = name.slice(0, -3);
+                let command = new Command(name, prefix, require(directory + '/' + name + '.js'));
+                this.commands.push(command);
+              } catch (e) {
+                console.log(`CommandManager loadDirectory() error: ${e} while parsing ${name}.js in ${directory}`);
+              }
+            }
+          }
+          resolve();
+        }
+      });
+    });
   }
-  
+
   async executeCommand(cmd, msg = [], flags, msgMetadata) {
     let passDex = Dex;
     let authorId = msgMetadata.author.id;
     let isElevated = config.elevated.includes(parseInt(authorId));
     let isAdmin = config.admins.includes(parseInt(authorId));
-    
+
     if (cmd === `${config.dexCommandPrefix}${config.helpCommand}` || cmd === `${config.botCommandPrefix}${config.helpCommand}`) {
       let usedPrefix = cmd.slice(0, -1 * config.helpCommand.length);
       for (let i = 0; i < this.commands.length; i++){
@@ -70,17 +70,17 @@ class CommandManager {
       }
       return this.helpCommand(usedPrefix, '', flags, isAdmin, isElevated);
     }
-    
+
     for (let i = 0; i < this.commands.length; i++){
       let command = this.commands[i];
-      if (command.trigger(cmd)) {        
+      if (command.trigger(cmd)) {
         if (command.adminOnly && !isAdmin) {
           return undefined;
         }
         if (command.elevated && !isAdmin && !isElevated) {
           return undefined;
         }
-        let parsedFlags = {};        
+        let parsedFlags = {};
         for (let j = 0; j < command.options.length; j++) {
           let currentOption = command.options[j];
           parsedFlags[currentOption.name] = currentOption.value;
@@ -98,7 +98,7 @@ class CommandManager {
             }
           }
         }
-        
+
         let commandOutput;
         try {
           switch (command.commandType) {
@@ -118,7 +118,7 @@ class CommandManager {
           console.log(`ERROR: ${e} at ${e.stack}\nfrom command ${command.name}\nwith input ${msg}\nwith parsedFlags ${JSON.stringify(parsedFlags)}\nin server ${msgMetadata.guild} by user ${authorId} (${msgMetadata.author.username}#${msgMetadata.author.discriminator})`);
           commandOutput = false;
         }
-       
+
         let badOutput = false;
         if (!commandOutput) {
           badOutput = true;
@@ -160,7 +160,7 @@ class CommandManager {
     }
     return null;
   }
-  
+
   helpCommand(prefix, cmd, flags, isAdmin, isElevated) {
     Logger.logCommand(`${config.helpCommand}`);
     let sendMsg = [];
@@ -179,14 +179,14 @@ class CommandManager {
       }
       return sendMsg;
     }
-      
+
     if (cmd.adminOnly && !isAdmin) {
       return "```" + `${cmd.name} is an admin-only command.` + "```";
     }
     if (cmd.elevated && !isAdmin && !isElevated) {
       return "```" + `${cmd.name} is an elevated-only command.` + "```";
     }
-    
+
     sendMsg = [
       cmd.name,
       `${prefix}${cmd.name} ${cmd.usage}`,
@@ -204,7 +204,7 @@ class CommandManager {
     }
     return sendMsg;
   }
-  
+
 }
 
 module.exports = CommandManager;

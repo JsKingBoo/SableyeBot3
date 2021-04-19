@@ -14,27 +14,27 @@ module.exports = {
     if (msg.length === 0){
       return null;
     }
-    
+
     let sendMsg = [];
-		
-    let item = dex.getItem(msg[0]);
+
+    let item = dex.items.get(msg[0]);
     if (!item || !item.exists) {
       item = dex.dataSearch(msg[0], ['Items']);
       if (!item) {
         return `No item ${msg[0]} found.`;
       }
       sendMsg.push(`No item ${msg[0]} found. Did you mean ${item[0].name}?`);
-      item = dex.getItem(item[0].name);
+      item = dex.items.get(item[0].name);
     }
     if (item.gen > dex.gen) {
       return `${item.name} did not exist in gen${dex.gen}; it was introduced in gen${item.gen}.`;
     }
-		
+
     sendMsg = sendMsg.concat([
       `${item.name}`,
       `${(item.desc || "No description availible.")}`
     ]);
-    
+
     if (flags.verbose) {
       if (item.naturalGift) {
         sendMsg.push(`Natural Gift: BP: ${(item.naturalGift.basePower || "-")}; Type: [${(item.naturalGift.type || "-")}]`);
@@ -42,12 +42,12 @@ module.exports = {
       if (item.fling) {
         sendMsg.push(`Fling: BP: ${(item.fling.basePower || "-")} Status: ${((item.fling.status || item.fling.volatileStatus) || "-")}`);
       }
-      
+
       sendMsg.push(`Introduced in gen${item.gen}`);
     }
-    
+
     return sendMsg;
-		
+
   }
 };
 

@@ -12,7 +12,7 @@ module.exports = {
     }
 
     let sendMsg = [];
-    let pokemon = dex.getSpecies(msg[0]);
+    let pokemon = dex.species.get(msg[0]);
     let eventId = (msg.length > 1 ? parseInt(msg[1]) : -1);
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex']);
@@ -20,7 +20,7 @@ module.exports = {
         return `No Pokémon ${msg[0]} found.`;
       }
       sendMsg.push(`No Pokémon ${msg[0]} found. Did you mean ${pokemon[0].name}?`);
-      pokemon = dex.getSpecies(pokemon[0].name);
+      pokemon = dex.species.get(pokemon[0].name);
     }
     if (pokemon.gen > dex.gen) {
       return `${pokemon.species} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.`;
@@ -47,7 +47,7 @@ module.exports = {
     sendMsg = sendMsg.concat([
       `${pokemon.name} (Event ${eventId})`,
       `Gen${eventData.generation}; level ${eventData.level}`,
-      `${eventData.pokeball ? dex.getItem(eventData.pokeball).name : "-"}; ${(eventData.gender || "-")}; ${(eventData.nature || "-")}`,
+      `${eventData.pokeball ? dex.items.get(eventData.pokeball).name : "-"}; ${(eventData.gender || "-")}; ${(eventData.nature || "-")}`,
       `Hidden ability: ${eventData.isHidden ? "yes" : "no"}; Shiny: ${eventData.shiny ? "yes" : "no"}`
     ]);
 
@@ -63,7 +63,7 @@ module.exports = {
     }
     sendMsg.push("Moves:");
     for (let i = 0; i < eventData.moves.length; i++){
-      sendMsg.push(` - ${dex.getMove(eventData.moves[i]).name}`);
+      sendMsg.push(` - ${dex.moves.get(eventData.moves[i]).name}`);
     }
     return sendMsg;
 

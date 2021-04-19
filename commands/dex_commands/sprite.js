@@ -40,13 +40,13 @@ module.exports = {
       return "```PokemonShowdown's sprite directory:``` https://play.pokemonshowdown.com/sprites/";
     }
 
-    let pokemon = dex.getSpecies(msg[0]);
+    let pokemon = dex.species.get(msg[0]);
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex']);
       if (!pokemon) {
         return '```' + `No Pokémon ${msg[0]} found.` + '```';
       }
-      pokemon = dex.getSpecies(pokemon[0].name);
+      pokemon = dex.species.get(pokemon[0].name);
     }
 
     if (pokemon.gen > dex.gen) {
@@ -70,7 +70,7 @@ module.exports = {
     }
     if (flags.noani && genNum >= 7 && !flags.back) {
       genData = "dex";
-    }      
+    }
 
     let dir = '';
     let facing = 'front';

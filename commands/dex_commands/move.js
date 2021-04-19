@@ -1,5 +1,5 @@
 'use strict';
-			
+
 let stats = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion'];
 
 module.exports = {
@@ -19,14 +19,14 @@ module.exports = {
 
     let sendMsg = [];
 
-    let move = dex.getMove(msg[0]);
+    let move = dex.moves.get(msg[0]);
     if (!move || !move.exists) {
       move = dex.dataSearch(msg[0], ['Moves']);
       if (!move) {
         return `No move ${msg[0]} found.`;
       }
       sendMsg.push(`No move ${msg[0]} found. Did you mean ${move[0].name}?`);
-      move = dex.getMove(move[0].name);
+      move = dex.moves.get(move[0].name);
     }
     if (move.gen > dex.gen) {
       return `${move.name} did not exist in gen${dex.gen}; it was introduced in gen${move.gen}.`;
@@ -35,7 +35,7 @@ module.exports = {
     let zStr = "";
     if (dex.gen === 7 || dex.gen === 0) {
       if (move.isZ) {
-        zStr = `(${dex.getItem(move.isZ).name})`;
+        zStr = `(${dex.items.get(move.isZ).name})`;
       } else if (move.zMoveEffect) {
         zStr = `(Z: ${move.zMoveEffect})`;
       } else if (move.zMoveBoost) {
@@ -70,7 +70,7 @@ module.exports = {
       `${(move.desc || move.shortDesc)}`,
       `Priority: ${((move.priority > 0) ? "+" : "")}${move.priority}`
     ]);
-		
+
     if (flags.verbose) {
       sendMsg.push(`Target: ${move.target}`);
       sendMsg.push(`Introduced in gen${move.gen}`);
@@ -145,7 +145,7 @@ module.exports = {
     }
 
     return sendMsg;
-		
+
   }
 };
 

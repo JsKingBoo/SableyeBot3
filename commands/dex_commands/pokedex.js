@@ -19,30 +19,30 @@ module.exports = {
     value: false,
     desc: "Gives additional information such as BST, generation, weight, height, and tier."
   }],
-  process: async function(msg, flags, dex) {    
+  process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;
     }
     let sendMsg = [];
-    
-    let pokemon = dex.getSpecies(msg[0]);
+
+    let pokemon = dex.species.get(msg[0]);
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex']);
       if (!pokemon) {
         return `No Pokémon ${msg[0]} found.`;
       }
       sendMsg.push(`No Pokémon ${msg[0]} found. Did you mean ${pokemon[0].name}?`);
-      pokemon = dex.getSpecies(pokemon[0].name);
+      pokemon = dex.species.get(pokemon[0].name);
     }
     if (pokemon.gen > dex.gen) {
       return `${pokemon.name} did not exist in gen${dex.gen}; it was introduced in gen${pokemon.gen}.`;
     }
-     
+
     // Must check ability compatibility
     let abilitiesStr = 'Ability: <none>';
     if (dex.gen >= 3) {
       abilitiesStr = [pokemon.abilities['0']];
-      if (pokemon.abilities['1'] && dex.getAbility(pokemon.abilities['1']).gen <= dex.gen) {
+      if (pokemon.abilities['1'] && dex.abilities.get(pokemon.abilities['1']).gen <= dex.gen) {
         abilitiesStr.push(pokemon.abilities['1']);
       }
       if (pokemon.abilities['H']) {
@@ -50,9 +50,9 @@ module.exports = {
       }
       (abilitiesStr.length === 1) ? abilitiesStr = 'Ability: ' + abilitiesStr[0] : abilitiesStr = `Abilities: ${abilitiesStr.join(", ")}`;
     }
-    
+
     let bstStr = (flags.verbose ? ` [BST: ${(pokemon.baseStats.hp + pokemon.baseStats.atk + pokemon.baseStats.spa + pokemon.baseStats.spe + pokemon.baseStats.def + pokemon.baseStats.spd)}]` : '');
-    
+
     sendMsg = sendMsg.concat([
       `No. ${pokemon.num}: ${pokemon.name} [${pokemon.types.join('/')}]`,
       `${abilitiesStr}`,
@@ -70,11 +70,11 @@ module.exports = {
     if (pokemon.baseSpecies !== pokemon.name){
       sendMsg.push(`Base species: ${pokemon.baseSpecies}`);
     }
-    
+
     if (pokemon.otherFormes){
       let otherFormHelper = [];
       for (let i = 0; i < pokemon.otherFormes.length; i++){
-        let otherForme = dex.getSpecies(pokemon.otherFormes[i]);
+        let otherForme = dex.species.get(pokemon.otherFormes[i]);
         if (otherForme.gen <= dex.gen) {
           otherFormHelper.push(otherForme.name);
         }
@@ -83,24 +83,24 @@ module.exports = {
         sendMsg.push(`Other formes: ${otherFormHelper.join(",")}`);
       }
     }
-    
+
     if (flags.verbose) {
       if (pokemon.prevo) {
-        sendMsg.push(`Prevo: ${dex.getSpecies(pokemon.prevo)}`);
+        sendMsg.push(`Prevo: ${dex.species.get(pokemon.prevo)}`);
       }
       if (pokemon.nfe) {
         let formatEvos = [];
         for (let i = 0; i < pokemon.evos.length; i++){
-          let evo = dex.getSpecies(pokemon.evos[i]);
+          let evo = dex.species.get(pokemon.evos[i]);
           if (evo.gen <= dex.gen) {
             formatEvos.push(evo.name);
           }
         }
         sendMsg.push(`Evo: ${formatEvos.join(", ")}`);
       }
-      
+
       sendMsg.push(`Egg groups: ${pokemon.eggGroups.join(", ")}`);
-      
+
       let genders = ['M', 'F'];
       let genderStr = [];
       for (let i = 0; i < genders.length; i++) {
@@ -112,7 +112,7 @@ module.exports = {
         genderStr = ['N: 100%'];
       }
       sendMsg.push(`Gender ratio: ${genderStr.join(", ")}`);
-      
+
       if (pokemon.color) {
         sendMsg.push(`Color: ${pokemon.color}`);
       }
@@ -133,6 +133,6 @@ module.exports = {
       }
     }
     return sendMsg;
-    
+
   }
 };

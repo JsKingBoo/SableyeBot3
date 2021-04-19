@@ -1,24 +1,27 @@
 'use strict';
 
+const path = require('path');
+const capitalize = require(path.resolve(__dirname, '../../utils/capitalize.js'));
+
 let flyingPressEffectiveness =  {
-  Bug: 0,
-  Dark: 1,
-  Dragon: 0,
-  Electric: 2,
-  Fairy: 2,
-  Fighting: 1,
-  Fire: 0,
-  Flying: 2,
-  Ghost: 3,
-  Grass: 1,
-  Ground: 0,
-  Ice: 1,
-  Normal: 1,
-  Poison: 2,
-  Psychic: 2,
-  Rock: 0,
-  Steel: 0,
-  Water: 0
+  bug: 0,
+  dark: 1,
+  dragon: 0,
+  electric: 2,
+  fairy: 2,
+  fighting: 1,
+  fire: 0,
+  flying: 2,
+  ghost: 3,
+  grass: 1,
+  ground: 0,
+  ice: 1,
+  normal: 1,
+  poison: 2,
+  psychic: 2,
+  rock: 0,
+  steel: 0,
+  water: 0
 };
 
 module.exports = {
@@ -35,16 +38,16 @@ module.exports = {
     if (msg.length === 0){
       return null;
     }
-		
+
     let types = Object.keys(dex.data.TypeChart);
     let attackTyping = [];
-    
-    let pokemon = dex.getSpecies(msg[0]);
+
+    let pokemon = dex.species.get(msg[0]);
     if (!pokemon || !pokemon.exists || pokemon.gen > dex.gen) {
       pokemon = {name: '-'};
       for (let i = 0; i < Math.min(msg.length, 4); i++) {
-        let capitalCaseType = `${msg[i].charAt(0).toUpperCase()}${msg[i].slice(1)}`;
-        if (dex.data.TypeChart[capitalCaseType]) {
+        let capitalCaseType = capitalize(msg[i]);
+        if (dex.data.TypeChart[msg[i]]) {
           attackTyping.push(capitalCaseType);
         }
         if (capitalCaseType === 'Flyingpress' && dex.gen >= 7) {
@@ -60,7 +63,7 @@ module.exports = {
     if (attackTyping.length === 0) {
       return null;
     }
-    
+
     let sendMsg = [
       `${pokemon.name} [${attackTyping.join('/')}]`,
       "x0.00: ",
@@ -68,9 +71,9 @@ module.exports = {
       "x1.00: ",
       "x2.00: ",
     ];
-    
+
     let effective = {};
-    
+
     //x1, x2, x1/2, x0
     let typeChartToModifierMap;
     if (flags.inverse) {
@@ -78,29 +81,29 @@ module.exports = {
     } else {
       typeChartToModifierMap = [2, 3, 1, 0];
     }
-    
+
     for (let i = 0; i < types.length; i++){
       effective[types[i]] = 0;
-      
+
       for (let j = 0; j < attackTyping.length; j++) {
         let effectivenessIndex = 0;
         if (attackTyping[j] === "Flying Press") {
           effectivenessIndex = flyingPressEffectiveness[types[i]];
         } else if (attackTyping[j] === "Freeze-Dry") {
-          if (types[i] === 'Water') {
+          if (types[i] === 'water') {
             //Freeze-Dry is ALWAYS super effective against water even in inverse battles
-            effectivenessIndex = (flags.inverse ? 2 : 1); 
+            effectivenessIndex = (flags.inverse ? 2 : 1);
           } else {
             effectivenessIndex = dex.data.TypeChart[types[i]].damageTaken['Water'];
           }
         } else {
           effectivenessIndex = dex.data.TypeChart[types[i]].damageTaken[attackTyping[j]];
         }
-        
+
         effective[types[i]] = Math.max(effective[types[i]], typeChartToModifierMap[effectivenessIndex]);
       }
-      
-      sendMsg[effective[types[i]] + 1] += `${types[i]}; `;
+
+      sendMsg[effective[types[i]] + 1] += `${capitalize(types[i])}; `;
     }
     return sendMsg;
   }

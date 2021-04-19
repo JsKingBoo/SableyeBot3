@@ -25,28 +25,28 @@ module.exports = {
     value: false,
     desc: "Lists learnset information of more generations."
   },
-  {
-    name: "cap",
-    value: false,
-    desc: "Includes non-canon Pokémon."
-  },
-  {
-    name: "vgc",
-    value: false,
-    desc: "Exclude moves learned in previous generations."
-  },
-  {
-    name: "natdex",
-    value: false,
-    desc: "Consider the entire National Pokedex. Only applicable for //learn <move name>."
-  }],
+    {
+      name: "cap",
+      value: false,
+      desc: "Includes non-canon Pokémon."
+    },
+    {
+      name: "vgc",
+      value: false,
+      desc: "Exclude moves learned in previous generations."
+    },
+    {
+      name: "natdex",
+      value: false,
+      desc: "Consider the entire National Pokedex. Only applicable for //learn <move name>."
+    }],
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;
     }
     let sendMsg = [];
 
-    let pokemon = dex.getSpecies(msg[0]);
+    let pokemon = dex.species.get(msg[0]);
     let moves = [];
     if (!pokemon || !pokemon.exists) {
       pokemon = dex.dataSearch(msg[0], ['Pokedex', 'Moves']);
@@ -59,7 +59,7 @@ module.exports = {
         }
       } else {
         sendMsg.push(`No Pokémon ${msg[0]} found. Did you mean ${pokemon[0].name}?`);
-        pokemon = dex.getSpecies(pokemon[0].name);
+        pokemon = dex.species.get(pokemon[0].name);
       }
     }
     if (pokemon && pokemon.gen > dex.gen && !flags.verbose) {
@@ -69,14 +69,14 @@ module.exports = {
     if (msg.length > 1) {
       const list = msg.slice(1)
       for (const i in list) {
-        let move = dex.getMove(list[i]);
+        let move = dex.moves.get(list[i]);
         if (!move || !move.exists) {
           move = dex.dataSearch(list[i], ['Moves']);
           if (!move) {
             move = null;
           } else {
             sendMsg.push(`No move ${list[i]} found. Did you mean ${move[0].name}?`);
-            moves.push(dex.getMove(move[0].name));
+            moves.push(dex.moves.get(move[0].name));
           }
         } else {
           moves.push(move);
@@ -107,7 +107,7 @@ module.exports = {
         if (moveEntry.name === 'sketch') {
           sketch = true;
         }
-        moveNames[dex.getMove(moveEntry.name).name] = 1;
+        moveNames[dex.moves.get(moveEntry.name).name] = 1;
       }
 
       let listMoves = Object.keys(moveNames).sort();
@@ -129,7 +129,7 @@ module.exports = {
         if (!flags.cap && dex.data.Pokedex[allMons[i]].num <= 0) {
           continue;
         }
-        let template = dex.getSpecies(allMons[i])
+        let template = dex.species.get(allMons[i])
         if (!flags.natdex && template.tier === "Illegal") {
           continue;
         }

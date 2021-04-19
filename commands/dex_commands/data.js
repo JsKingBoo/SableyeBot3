@@ -29,19 +29,19 @@ module.exports = {
     if (msg.length === 0){
       return null;
     }
-    
+
     if (msg.length >= 2) {
       if (stats.includes(msg[0]) && stats.includes(msg[1])) {
         return naturejs.process(msg, flags, dex);
       }
     }
-    
+
     let search = dex.dataSearch(msg[0]);
     if (!search) {
       return `Cannot recognize ${msg.join(",")}.`;
     }
-    
+
     return dbLink[search[0].searchType].process(msg, flags, dex);
-    
+
   }
 };

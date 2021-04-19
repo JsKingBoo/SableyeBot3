@@ -85,7 +85,7 @@ function getPokemonProperty(pokemon, property, dex, flags) {
     case 'name':
     case 'speciesid':
       return pokemon.speciesid;
-    case 'basespecies': return dex.getSpecies(pokemon.baseSpecies).speciesid;
+    case 'basespecies': return dex.species.get(pokemon.baseSpecies).speciesid;
     case 'gen': return pokemon.gen;
     case 'ability': return pokemon.abilities;
     case 'type':
@@ -324,7 +324,7 @@ module.exports = {
     let speciesMatch = {};
     let maxMatches = -1;
     for (let pokemon in dex.data.Pokedex) {
-      let template = dex.getSpecies(pokemon);
+      let template = dex.species.get(pokemon);
       if (!flags.cap && template.num <= 0) {
         continue;
       }
@@ -418,8 +418,8 @@ module.exports = {
       for (let sortIndex = 0; sortIndex < sortParameters.length; sortIndex++) {
         let sorter = sortParameters[sortIndex];
         speciesMatch[fitsIndex].sort(function(aa, bb) {
-          let a = getPokemonProperty(dex.getSpecies(aa), sorter.value, dex, flags);
-          let b = getPokemonProperty(dex.getSpecies(bb), sorter.value, dex, flags);
+          let a = getPokemonProperty(dex.species.get(aa), sorter.value, dex, flags);
+          let b = getPokemonProperty(dex.species.get(bb), sorter.value, dex, flags);
           if (typeof a === "number" || typeof b === "number") {
             return b - a;
           } else if (typeof a === "string" || typeof b === "string") {

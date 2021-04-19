@@ -3,7 +3,7 @@
 module.exports = {
   desc: "Information of an ability",
   longDesc: [
-    "Gives information on the effects of an ability and rates it. The rating scale goes from -2 to 5 and is based on its usefulness in a singles battle.", 
+    "Gives information on the effects of an ability and rates it. The rating scale goes from -2 to 5 and is based on its usefulness in a singles battle.",
     "-2: Extremely detrimental",
     "The sort of ability that relegates Pokemon with Uber-level BSTs into NU. ex. Slow Start, Truant",
     "-1: Detrimental",
@@ -27,26 +27,26 @@ module.exports = {
     if (msg.length === 0) {
       return null;
     }
-		
+
     if (dex.gen === 1 || dex.gen === 2) {
       return 'Abilities did not exist until gen3.';
     }
-    
+
     let sendMsg = [];
-    
-    let ability = dex.getAbility(msg[0]);
+
+    let ability = dex.abilities.get(msg[0]);
     if (!ability || !ability.exists) {
       ability = dex.dataSearch(msg[0], ['Abilities']);
       if (!ability) {
         return `No ability ${msg[0]} found.`;
       }
       sendMsg.push(`No ability ${msg[0]} found. Did you mean ${ability[0].name}?`);
-      ability = dex.getAbility(ability[0].name);
+      ability = dex.abilities.get(ability[0].name);
     }
     if (ability.gen > dex.gen) {
       return `${ability.name} did not exist in gen${dex.gen}; it was introduced in gen${ability.gen}.`;
     }
-		
+
     sendMsg = sendMsg.concat([
       `${ability.name}`,
       `${(ability.desc || ability.shortDesc)}`,
@@ -54,6 +54,6 @@ module.exports = {
     ]);
 
     return sendMsg;
-		
+
   }
 };
