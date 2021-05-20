@@ -8,7 +8,7 @@ class Command {
     this.prefix = prefix;
     this.usage = cmd.usage || "";
     this.desc = cmd.desc || "No description.";
-    this.longDesc = cmd.longDesc || this.desc;	
+    this.longDesc = cmd.longDesc || this.desc;
     this.adminOnly = cmd.adminOnly || false;
     this.elevated = cmd.elevated || false;
     this.aliases = cmd.aliases || [];
@@ -21,7 +21,7 @@ class Command {
     if (Array.isArray(this.longDesc)) {
       this.longDesc = this.longDesc.join('\n');
     }
-    
+
     this.options = [];
     if (cmd.options) {
       for (let i = 0; i < cmd.options.length; i++){
@@ -30,7 +30,7 @@ class Command {
       }
     }
   }
-  
+
   trigger(cmd = '') {
     if (this.disabled) {
       return false;
@@ -46,18 +46,18 @@ class Command {
     }
     return false;
   }
-  
+
   execute(msg = [], flags = this.options) {
     if (this.disabled) {
       return;
     }
     return this.process(msg, flags);
   }
-  
+
   toString() {
     return `${this.prefix}${this.name} ${this.usage}`;
   }
-  
+
 }
 
 class DexCommand extends Command {
@@ -65,7 +65,7 @@ class DexCommand extends Command {
     super(name, prefix, cmd);
     this.commandType = 'DexCommand';
     this.regex = cmd.regex || /[^0-9a-z-]/gi;
-    
+
     let hasDex = false;
     for (let i = 0; i < this.options.length; i++){
       if (this.options[i].name === 'gen') {
@@ -77,7 +77,7 @@ class DexCommand extends Command {
       this.options.push(new Flag('gen', config.defaultGen, "Pokémon generation to parse with."));
     }
   }
-  
+
   execute(msg = [], flags = this.options, dex = null) {
     if (this.disabled) {
       return;
@@ -101,7 +101,7 @@ class BotCommand extends Command {
     super(name, prefix, cmd);
     this.commandType = 'BotCommand';
   }
-  
+
   execute(msg = [], flags = this.options) {
     if (this.disabled) {
       return;
@@ -115,12 +115,12 @@ class FCCommand extends Command {
     super(name, prefix, cmd);
     this.commandType = 'FCCommand';
   }
-  
-  execute(msg = [], flags = this.options, authorId = -1, fcm = null) {
+
+  execute(msg = [], flags = this.options, authorId = -1, fcm = null, queryUser = null) {
     if (this.disabled) {
       return;
     }
-    return this.process(msg, flags, authorId, fcm);
+    return this.process(msg, flags, authorId, fcm, queryUser);
   }
 }
 

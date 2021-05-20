@@ -13,7 +13,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^11.4.2",
+    "discord.js": "^12.5.3",
     "lokijs": "^1.5.5"
   },
   "devDependencies": {

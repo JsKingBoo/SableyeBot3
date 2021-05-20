@@ -56,9 +56,10 @@ class CommandManager {
 
   async executeCommand(cmd, msg = [], flags, msgMetadata) {
     let passDex = Dex;
-    let authorId = msgMetadata.author.id;
-    let isElevated = config.elevated.includes(parseInt(authorId));
-    let isAdmin = config.admins.includes(parseInt(authorId));
+    let author = msgMetadata.author;
+    let queryUser = msgMetadata.mentions.users.first();
+    let isElevated = config.elevated.includes(parseInt(author.id));
+    let isAdmin = config.admins.includes(parseInt(author.id));
 
     if (cmd === `${config.dexCommandPrefix}${config.helpCommand}` || cmd === `${config.botCommandPrefix}${config.helpCommand}`) {
       let usedPrefix = cmd.slice(0, -1 * config.helpCommand.length);
@@ -109,13 +110,13 @@ class CommandManager {
               commandOutput = await command.execute(msg, parsedFlags, passDex);
               break;
             case 'FCCommand':
-              commandOutput = await command.execute(msg, parsedFlags, authorId, fcm);
+              commandOutput = await command.execute(msg, parsedFlags, author, fcm, queryUser);
               break;
             default:
               commandOutput = await command.execute(msg, parsedFlags);
           }
         } catch (e) {
-          console.log(`ERROR: ${e} at ${e.stack}\nfrom command ${command.name}\nwith input ${msg}\nwith parsedFlags ${JSON.stringify(parsedFlags)}\nin server ${msgMetadata.guild} by user ${authorId} (${msgMetadata.author.username}#${msgMetadata.author.discriminator})`);
+          console.log(`ERROR: ${e} at ${e.stack}\nfrom command ${command.name}\nwith input ${msg}\nwith parsedFlags ${JSON.stringify(parsedFlags)}\nin server ${msgMetadata.guild} by user ${author.id} (${msgMetadata.author.username}#${msgMetadata.author.discriminator})`);
           commandOutput = false;
         }
 
