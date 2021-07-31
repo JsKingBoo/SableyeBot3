@@ -2,7 +2,7 @@
 # SableyeBot
 ### Competitive Pokemon Discord bot
 
-## [Add SableyeBot to your server](https://discordapp.com/oauth2/authorize?&client_id=211522070620667905&scope=bot)
+## [Add SableyeBot to your server](https://discord.com/api/oauth2/authorize?client_id=211522070620667905&permissions=0&scope=bot%20applications.commands)
 
 ## Installation
 SableyeBot requires NodeJS 10+. In order to run your own local copy of SableyeBot, you need to perform a few steps.
