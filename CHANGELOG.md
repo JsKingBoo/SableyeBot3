@@ -1,3 +1,7 @@
+### 3.1.24 - 2021-08-05
+
+ * Update libraries and fix the bot invite link to prepare for slash commands.
+
 ### 3.1.23 - 2020-10-26
 
  * New Crown Tundra learnsets added.
