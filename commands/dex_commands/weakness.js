@@ -26,13 +26,14 @@ module.exports = {
       pokemon = {name: '-'};
       for (let i = 0; i < Math.min(msg.length, 2); i++) {
         let capitalCaseType = `${msg[i].charAt(0).toUpperCase()}${msg[i].slice(1)}`;
-        if (dex.data.TypeChart[capitalCaseType]) {
+        if (dex.data.TypeChart[msg[i]]) {
           targetTyping.push(capitalCaseType);
         }
       }
     } else {
       targetTyping = pokemon.types;
     }
+
     if (targetTyping.length === 0) {
       return null;
     }
