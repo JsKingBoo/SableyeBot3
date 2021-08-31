@@ -1,3 +1,8 @@
+### 3.1.25 - 2021-08-31
+
+ * Add new filters `resist` and `weakness`
+ * Fix bug in `//weakness <type>[, <type>]`
+
 ### 3.1.24 - 2021-08-05
 
  * Update libraries and fix the bot invite link to prepare for slash commands.
