@@ -64,17 +64,17 @@ const truthyValues = {
 
 function getEffectiveness(defending, attacking, dex) {
   if (defending.length > 1) {
-    return getEffectiveness([defending[0]], attacking, dex) + getEffectiveness([defending[1]], attacking, dex);
+    return getEffectiveness([defending[0]], attacking, dex) * getEffectiveness([defending[1]], attacking, dex);
   }
-  let effectiveness = dex.data.TypeChart[defending].damageTaken[attacking];
+  let effectiveness = dex.data.TypeChart[defending[0].toLowerCase()].damageTaken[attacking];
   if (effectiveness === 1) {
-    return 1;
+    return 2;
   } else if (effectiveness === 2) {
-    return -1;
+    return 0.5;
   } else if (effectiveness === 3) {
-    return -9;
-  } else {
     return 0;
+  } else {
+    return 1;
   }
 }
 
@@ -137,7 +137,18 @@ function getPokemonProperty(pokemon, property, dex, flags) {
     case 'otherformes': return pokemon.otherFormes;
     case 'otherforms': return pokemon.otherForms;
     case 'tier': return pokemon.tier.toLowerCase();
-    case 'resist': return '*';
+    case 'resist':
+      return ['Normal', 'Fighting', 'Flying', 'Poison', 'Ground',
+        'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Water', 'Grass',
+        'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Fairy'].filter((type)=>{
+          return getEffectiveness(pokemon.types, type, dex) < 1;
+        });
+    case 'weakness':
+      return ['Normal', 'Fighting', 'Flying', 'Poison', 'Ground',
+        'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Water', 'Grass',
+        'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Fairy'].filter((type)=>{
+          return getEffectiveness(pokemon.types, type, dex) < 1;
+        });
     default: return null;
   }
 }
@@ -176,6 +187,8 @@ module.exports = {
     'formeLetter - Forme letter. Pokémon in their base formee are ignored. e.g. "formeLetter=m",',
     'otherFormes - Other formes. Pokémon without other formes are ignored. e.g. "otherFormes=rotomwash",',
     'otherForms - Other forms. Not to be confused with otherFormes. Visual-only forme change. e.g. "otherFormes=gastrodoneast",',
+    'resist - Resistances. e.g. "resist=fire" matches Pokemon that resist Fire.',
+    'weakness - Weaknesses. e.g. "weakness=fire" matches Pokemon the are weak to Fire.',
     'threshold - Number of parameters that the Pokémon must fulfill, not including this one or "sort". e.g. "threshold>=2",',
     'sort - The argument that the list will be sorted by in ascending order. e.g. "sort=atk",',
     'EXAMPLE: "//filter hp=50,atk>=75,color=purple,formeLetter=m,eggGroups=humanlike"',
@@ -356,11 +369,6 @@ module.exports = {
         let parameterCheck = false;
         if (isMultiValue(pokemonProperty)) {
           parameterCheck = multiValueChecker(parameter.operator, pokemonProperty, parameter.value);
-        } else if (pokemonProperty === "*") {
-          if (parameter.key === "resist") {
-            let resists = (getEffectiveness(template.types, parameter.value.charAt(0).toUpperCase() + parameter.value.slice(1), dex) < 0);
-            parameterCheck = operatorCompare[parameter.operator](resists, true);
-          }
         } else {
           parameterCheck = operatorCompare[parameter.operator](pokemonProperty, parameter.value);
         }
