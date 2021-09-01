@@ -147,7 +147,7 @@ function getPokemonProperty(pokemon, property, dex, flags) {
       return ['Normal', 'Fighting', 'Flying', 'Poison', 'Ground',
         'Rock', 'Bug', 'Ghost', 'Steel', 'Fire', 'Water', 'Grass',
         'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark', 'Fairy'].filter((type)=>{
-          return getEffectiveness(pokemon.types, type, dex) < 1;
+          return getEffectiveness(pokemon.types, type, dex) > 1;
         });
     default: return null;
   }
