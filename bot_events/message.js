@@ -57,7 +57,7 @@ async function resolveMessage(msg) {
   }
 
   if (typeof commandOutput === 'object') {
-    msg.channel.send(commandOutput.msg, commandOutput);
+    msg.channel.send(commandOutput);
   } else if (commandOutput.length < config.forcePM) {
     msg.channel.send(commandOutput, config.messageOptions);
   } else {

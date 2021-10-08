@@ -11,16 +11,15 @@ module.exports = {
   adminOnly: true,
   process: async function(msg, flags) {
     let sendMsg = [];
-    let servers = bot.guilds.array();
-    sendMsg.push(`Currently watching ${servers.length} server${servers.length === 1 ? '' : 's'}`);
+    let servers = bot.guilds.cache;
+    sendMsg.push(`Currently watching ${servers.size} server${servers.size === 1 ? '' : 's'}`);
     //Only spit out detailed list while in DM/PM channel
     if (flags.verbose) {
-      for (let i = 0; i < servers.length; i++) {
-        sendMsg.push(`[${i}] [${servers[i].id}] ${servers[i].name}`);
-      }
+      servers.forEach(server => {
+        sendMsg.push(`[${server.id}] ${server.name}`);
+      });
     }
     return sendMsg;
-		
   }
 };
 
