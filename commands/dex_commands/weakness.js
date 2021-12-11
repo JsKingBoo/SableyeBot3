@@ -19,18 +19,34 @@ module.exports = {
     }
 
     let types = Object.keys(dex.data.TypeChart);
+    let targetName = '-';
     let targetTyping = [];
-
-    let pokemon = dex.species.get(msg[0]);
-    if (!pokemon || !pokemon.exists || pokemon.gen > dex.gen) {
-      pokemon = {name: '-'};
-      for (let i = 0; i < Math.min(msg.length, 2); i++) {
-        let capitalCaseType = `${msg[i].charAt(0).toUpperCase()}${msg[i].slice(1)}`;
-        if (dex.data.TypeChart[msg[i]]) {
-          targetTyping.push(capitalCaseType);
+    let warnings = [];
+    
+    let capitalArg = `${msg[0].charAt(0).toUpperCase()}${msg[0].slice(1).toLowerCase()}`;
+    if (dex.data.TypeChart[msg[0].toLowerCase()]) {
+      // We are dealing with the `<type> <type>` form.
+      targetTyping.push(capitalArg);
+      if(msg.length > 1) {
+        capitalArg = `${msg[1].charAt(0).toUpperCase()}${msg[1].slice(1).toLowerCase()}`;
+        if (dex.data.TypeChart[msg[1]]) {
+          targetTyping.push(capitalArg);
         }
       }
     } else {
+      // We are dealing with the `<pokemon>` form
+      let pokemon = dex.species.get(msg[0]);
+      if (!pokemon || !pokemon.exists) {
+        pokemon = dex.dataSearch(msg[0], ['Pokedex']);
+        console.log(pokemon);
+        if (!pokemon) {
+          return `No Pokémon ${msg[0]} found.`;
+        }
+        warnings.push(`No Pokémon ${msg[0]} found. Did you mean ${pokemon[0].name}?`);
+        pokemon = dex.species.get(pokemon[0].name);
+      }
+      console.log(pokemon.name, pokemon.types);
+      targetName = pokemon.name;
       targetTyping = pokemon.types;
     }
 
@@ -38,8 +54,8 @@ module.exports = {
       return null;
     }
 
-    let sendMsg = [
-      `${pokemon.name} [${targetTyping.join('/')}]`,
+    let info = [
+      `${targetName} [${targetTyping.join('/')}]`,
       'x0.00: ',
       'x0.25: ',
       'x0.50: ',
@@ -68,10 +84,10 @@ module.exports = {
         effective[types[i]] += typeChartToModifierMap[typeChartValue];
       }
       effective[types[i]] = Math.max(-3, effective[types[i]]);
-      sendMsg[effective[types[i]] + 4] += `${capitalize(types[i])}; `;
+      info[effective[types[i]] + 4] += `${capitalize(types[i])}; `;
     }
 
-    return sendMsg;
+    return [...warnings, ...info];
 
   }
 };
