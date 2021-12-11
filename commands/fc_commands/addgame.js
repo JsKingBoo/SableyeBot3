@@ -20,6 +20,8 @@ module.exports = {
     " - Let's Go, Eevee!: LGE",
     " - Sword: SW",
     " - Shield: SH",
+    " - Brilliant Diamond: BD",
+    " - Shining Pearl: SP",
     "TSV stands for Trainer Shiny Value and is used to determine whether a Pokémon egg hatches a shiny."
   ],
   usage: '<abbreviated game>, <in-game name>, [TSV value]',
