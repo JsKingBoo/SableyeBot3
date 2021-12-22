@@ -13,8 +13,8 @@ module.exports = {
       description: "Competitive Pokemon Discord bot.",
       url: "https://github.com/JsKingBoo/SableyeBot3",
       author: {
-        name: "JsKingBoo#8858",
-        icon_url: "http://i.imgur.com/HYJS7kn.png"
+        name: "stalruth#3021",
+        icon_url: "https://cdn.discordapp.com/avatars/112038152390123520/56a380f68b4127e8bc49d8e08dd6bd6e.webp"
       },
       color: 0x5F32AB,
       fields: [
@@ -25,7 +25,6 @@ module.exports = {
         text: `SableyeBot version ${packagejson.version}`
       }
     }]});
-    
   }
 };
 
