@@ -16,7 +16,8 @@ module.exports = {
     //Only spit out detailed list while in DM/PM channel
     if (flags.verbose) {
       servers.forEach(server => {
-        sendMsg.push(`[${server.id}] ${server.name}`);
+        const joinedAt = server.joinedAt;
+        sendMsg.push(`[${server.id}] ${server.name} ${joinedAt.getUTCFullYear()}-${joinedAt.getUTCMonth()+1}-${joinedAt.getUTCDate()}`);
       });
     }
     return sendMsg;
