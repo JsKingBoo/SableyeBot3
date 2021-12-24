@@ -18,7 +18,7 @@ class FriendCode {
     this.fc = [];
     this.games = [];
   }
-  
+
   addFC(fc, miiName = "No name provided") {
     fc = (fc+'').replace(/\D/g, '').slice(0, 12);
     if (fc.length !== 12) {
@@ -34,7 +34,7 @@ class FriendCode {
     this.fc.push({ 'fc': fc, 'mii': miiName });
     return true;
   }
-  
+
   removeFC(fc) {
     if (typeof fc === 'number' && fc < this.fc.length) {
       this.fc.splice(fc, 1);
@@ -47,7 +47,7 @@ class FriendCode {
       }
     }
   }
-  
+
   addGame(game, name, tsv = null) {
     game = game.toLowerCase();
     if (!gamesList[game]) {
@@ -66,7 +66,7 @@ class FriendCode {
     });
     return true;
   }
-  
+
   removeGame(game) {
     game = game.toUpperCase();
     if (!gamesList[game.toLowerCase()]) {
@@ -85,11 +85,11 @@ class FriendCode {
       }
     }
   }
-  
+
   editGame(index, properties = {}) {
     Object.assign(this.games[index], properties);
   }  
-  
+
   static copy(fcObj) {
     if (!fcObj) {
       return null;
@@ -98,15 +98,15 @@ class FriendCode {
     c.discordID = fcObj.discordID;
     c.fc = fcObj.fc;
     c.games = fcObj.games;
+    c.queried = Date.now();
     return c;
   }
-  
 }
 
 class FCManager {
   constructor() {
   }
-  
+
   init() {
     return new Promise((resolve, reject) => {
       db.loadDatabase({}, () => {
@@ -118,7 +118,7 @@ class FCManager {
       });
     });
   }
-  
+
   registerUser(discordID) {
     discordID = (discordID+'').trim();
     let checkIfExists = this.fcData.find({
@@ -130,7 +130,7 @@ class FCManager {
     this.fcData.insert(new FriendCode(discordID));
     db.saveDatabase();
   }
-  
+
   addUser(friendCode) {
     //FriendCode object, not friend code string
     this.fcData.findAndRemove({
@@ -139,7 +139,7 @@ class FCManager {
     this.fcData.insert(friendCode);
     db.saveDatabase();
   }
-  
+
   getUser(discordID) {
     this.registerUser(discordID);
     return FriendCode.copy(this.fcData.find({

@@ -8,6 +8,7 @@ module.exports = {
     let queryId = queryUser ? queryUser.id : ((msg[0].length === 0 ? author.id : msg[0])+'').replace(/\D/g, '').trim();
     let userName = queryUser ? `@${queryUser.tag}` : queryId;
     let user = fcm.getUser(queryId);
+    fcm.addUser(user);
 
     let sendMsg = [
       `Info for ${userName}:`

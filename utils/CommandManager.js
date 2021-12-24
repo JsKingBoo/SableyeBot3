@@ -111,6 +111,11 @@ class CommandManager {
               break;
             case 'FCCommand':
               commandOutput = await command.execute(msg, parsedFlags, author, fcm, queryUser);
+/*
+              commandOutput.push('This command will be deprecated on 1-May-2022.')
+              commandOutput.push('If this command should be kept, plase ask here:')
+              commandOutput.push('https://github.com/Stalruth/SableyeBot4/issues');
+*/
               break;
             default:
               commandOutput = await command.execute(msg, parsedFlags);
