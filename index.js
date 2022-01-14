@@ -1,8 +1,9 @@
 'use strict';
 
-const cluster = require('cluster');
+//const cluster = require('cluster');
 const sableye = require('./sableye.js');
 
+/*
 if (cluster.isMaster) {
   cluster.fork();
 
@@ -24,3 +25,7 @@ if (cluster.isMaster) {
 if (cluster.isWorker) {
   sableye();
 }
+*/
+
+sableye();
+
