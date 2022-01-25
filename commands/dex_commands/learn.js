@@ -101,12 +101,18 @@ module.exports = {
         if (moveEntry.gen > dex.gen) {
           continue;
         }
-        if (flags.vgc && moveEntry.gen != dex.gen) {
-          continue;
+        if (flags.vgc) {
+          if (moveEntry.gen != dex.gen) {
+            continue;
+          }
+          if (moveEntry.method === 'V') {
+            continue;
+          }
         }
         if (moveEntry.name === 'sketch') {
           sketch = true;
         }
+        console.log(moveEntry);
         moveNames[dex.moves.get(moveEntry.name).name] = 1;
       }
 
