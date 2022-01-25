@@ -1,3 +1,12 @@
+### 3.1.26 - 2022-01-25
+
+ * Fix bug in `//filter`
+ * Update discord.js to version 13
+ * Add autocorrection to `//weakness`
+ * Add Brilliant Diamond and Shining Pearl to the Friend Code commands
+ * Update `//about` to reflect changeover of maintainers
+ * Fix `--vgc` not working with `//learn pokemon`
+
 ### 3.1.25 - 2021-08-31
 
  * Add new filters `resist` and `weakness`
