@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+
 const DAY = 1000 * 60 * 60 * 24;
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -48,11 +50,13 @@ module.exports = {
         }
       }
     }
+
+    fs.writeFileSync('logs/commandLog.txt', sendMsg.join('\n'));
     
     if (sendMsg.length === 0) {
       return "Command either does not exist or not used yet";
     }
     
-    return sendMsg;
+    return "Saved to disk.";
   }
 };
