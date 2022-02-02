@@ -18,7 +18,8 @@ module.exports = {
       },
       color: 0x5F32AB,
       fields: [
-        {name: "Invite Link", value: "[Click here](https://discord.com/api/oauth2/authorize?client_id=211522070620667905&permissions=0&scope=applications.commands%20bot)"},
+        {name: "Invite Link", value: "[Click here](https://discord.com/api/oauth2/authorize?client_id=211522070620667905&permissions=0&scope=applications.commands%20bot)", inline: true},
+        {name: "Privacy Policy", value: "[Click Here](https://github.com/JsKingBoo/SableyeBot3/blob/master/PRIVACY.md)", inline: true},
         {name: "Language", value: "JavaScript (discordjs)"}
       ],
       footer: {
