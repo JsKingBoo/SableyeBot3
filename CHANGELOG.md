@@ -1,3 +1,7 @@
+### 3.1.27 - 2022-02-02
+
+ * Add Privacy Policy to `//about`
+
 ### 3.1.26 - 2022-01-25
 
  * Fix bug in `//filter`
