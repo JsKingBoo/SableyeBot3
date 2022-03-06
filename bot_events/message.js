@@ -56,13 +56,72 @@ async function resolveMessage(msg) {
     return;
   }
 
+  const warnSlashCommands = Math.random() < 0.2;
+  const components = [];
+  const newEmbeds = [];
+
+  if(warnSlashCommands) {
+    const desc = [
+      'Message commands will be deprecated on the 30th of April 2022.',
+      'Click on the link above for more details',
+    ];
+    if(msg.guild) {
+      try {
+        await msg.guild.commands.fetch();
+        desc.push('Type one `/` in the chatbox to browse the available slash commands!');
+      } catch (e) {
+        desc.push('Have a moderator click the button below to enable slash commands in this server!');
+        components.push({
+          type: 1,
+          components: [
+            {
+              type: 2,
+              style: 5,
+              label: 'Add Slash Commands',
+              url: 'https://discord.com/api/oauth2/authorize?client_id=211522070620667905&permissions=0&scope=bot%20applications.commands',
+            }
+          ],
+        });
+      }
+    } else {
+      desc.push('Type one `/` in the chatbox to browse the available slash commands!');
+    }
+    newEmbeds.push({
+      title: 'Sableye Bot now uses Slash Commands!',
+      description: desc.join('\n\n'),
+      url: "https://sableye-bot.xyz/migration",
+      color: 0x5F32AB,
+      fields: [
+        {
+          name: 'Support Server',
+          value: 'https://discord.gg/etUxhVfA7u',
+          inline: true,
+        },
+      ],
+      footer: {
+        text: `SableyeBot version 4.x`,
+        icon_url: 'https://cdn.discordapp.com/avatars/211522070620667905/6b037c17fc6671f0a5dc73803a4c3338.webp',
+      }
+    });
+  }
+
   if (typeof commandOutput === 'object') {
+    commandOutput.embeds = [...commandOutput.embeds, ...newEmbeds];
+    commandOutput.components = components;
     msg.channel.send(commandOutput);
   } else if (commandOutput.length < config.forcePM) {
-    msg.channel.send(commandOutput, config.messageOptions);
+    const message = {
+      content: commandOutput,
+      tts: false,
+      embeds: newEmbeds,
+      components,
+    };
+    msg.channel.send(message);
   } else {
     if (msg.guild) {
-      msg.channel.send(`${msg.author}, sent response via PM.`);
+      msg.channel.send({
+        content: `${msg.author}, sent response via PM.`
+      });
     }
     let splitCommandOutput = [];
     for (let i = 0; i < config.maxPMs; i++) {
