@@ -116,7 +116,13 @@ module.exports = {
       }
     }
 
-    return `${SPRITE_URL}${dir}/${spriteId}${ending}`;
+    return {
+      embeds: [{
+        image: {
+          url: `${SPRITE_URL}${dir}/${spriteId}${ending}`,
+        }
+      }]
+    };
 
   }
 };
