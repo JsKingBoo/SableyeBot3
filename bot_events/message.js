@@ -56,7 +56,7 @@ async function resolveMessage(msg) {
     return;
   }
 
-  const warnSlashCommands = Math.random() < 0.2;
+  const warnSlashCommands = Math.random() < config.upgradeChance;
   const components = [];
   const newEmbeds = [];
 
