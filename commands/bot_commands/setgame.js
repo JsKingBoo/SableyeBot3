@@ -12,10 +12,10 @@ module.exports = {
     str = str.trim();
     bot.user.setPresence({
       'status': bot.user.presence.status,
-      'game': {
+      'activities': [{
         'name': str,
         'type': 0
-      }
+      }]
     });
     Logger.savePresence();
     return `Playing game set to "${str}"`;
