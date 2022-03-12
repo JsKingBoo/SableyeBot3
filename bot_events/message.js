@@ -59,6 +59,13 @@ async function resolveMessage(msg) {
   const warnSlashCommands = Math.random() < config.upgradeChance;
   const components = [];
   const newEmbeds = [];
+  const fields = [
+    {
+      name: 'Support Server',
+      value: 'https://discord.gg/etUxhVfA7u',
+      inline: true,
+    },
+  ];
 
   if(warnSlashCommands) {
     const desc = [
@@ -69,6 +76,10 @@ async function resolveMessage(msg) {
       try {
         await msg.guild.commands.fetch();
         desc.push('Type one `/` in the chatbox to browse the available slash commands!');
+        fields.unshift({
+          name: 'Upgrade',
+          value: cm.getUpgrade(cmd),
+        });
       } catch (e) {
         desc.push('Have a moderator click the button below to enable slash commands in this server!');
         components.push({
@@ -91,13 +102,7 @@ async function resolveMessage(msg) {
       description: desc.join('\n\n'),
       url: "https://sableye-bot.xyz/migration",
       color: 0x5F32AB,
-      fields: [
-        {
-          name: 'Support Server',
-          value: 'https://discord.gg/etUxhVfA7u',
-          inline: true,
-        },
-      ],
+      fields,
       footer: {
         text: `SableyeBot version 4.x`,
         icon_url: 'https://cdn.discordapp.com/avatars/211522070620667905/6b037c17fc6671f0a5dc73803a4c3338.webp',

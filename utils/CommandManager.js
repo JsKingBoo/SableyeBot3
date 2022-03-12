@@ -167,6 +167,15 @@ class CommandManager {
     return null;
   }
 
+  getUpgrade(cmd) {
+    for(let i of this.commands) {
+      if(i.trigger(cmd)) {
+        return i.upgrade;
+      }
+    }
+    return 'How\'d that happen?';
+  }
+
   helpCommand(prefix, cmd, flags, isAdmin, isElevated) {
     Logger.logCommand(`${config.helpCommand}`);
     let sendMsg = [];

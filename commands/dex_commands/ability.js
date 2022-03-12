@@ -23,6 +23,7 @@ module.exports = {
   ],
   usage: "<ability name>",
   aliases: ['abilities', 'abil'],
+  upgrade: '`//ability <ability name>` - `/dt name:<ability name>`',
   process: async function(msg, flags, dex) {
     if (msg.length === 0) {
       return null;

@@ -10,6 +10,7 @@ module.exports = {
     value: false,
     desc: "Gives additional information such as Natural Gift power, Natural Gift typing, Fling power, Fling status, and generation."
   }],
+  upgrade: '`//item <item name>` - `/dt name:<item name>`',
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;

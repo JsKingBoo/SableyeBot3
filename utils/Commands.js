@@ -17,6 +17,7 @@ class Command {
     this.storage = cmd.storage || {};
     this.process = cmd.process;
     this.commandType = 'Command';
+    this.upgrade = cmd.upgrade || 'This command will be deprecated on the 30th of April 2022.';
 
     if (Array.isArray(this.longDesc)) {
       this.longDesc = this.longDesc.join('\n');

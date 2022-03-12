@@ -223,6 +223,7 @@ module.exports = {
     },
   ],
   regex: /[^0-9a-z\-=<>!]/gi,
+  upgrade: '`//filter [arguments]` - `/filter [arguments]`',
   process: async function(msg, flags, dex) {
     if (msg.length === 0) {
       return null;

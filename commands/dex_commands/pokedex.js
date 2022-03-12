@@ -19,6 +19,7 @@ module.exports = {
     value: false,
     desc: "Gives additional information such as BST, generation, weight, height, and tier."
   }],
+  upgrade: '`//pokedex <pokemon name>` - `/dt name:<pokemon name>`',
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;

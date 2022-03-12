@@ -7,6 +7,7 @@ module.exports = {
   options: [],
   adminOnly: false,
   hasCustomFormatting: true,
+  upgrade: '`//about` - `/about`',
   process: async function(msg, flags) {
     return ({'embeds': [
       {

@@ -7,6 +7,10 @@ module.exports = {
   usage: "<type>|(<hp IV>,<atk IV>,<def IV>,<spa IV>,<spd IV>,<spe IV>)",
   aliases: ['hp'],
   options: [],
+  upgrade: [
+    '`//hiddenpower <type>` - `/hiddenpower from-type type: <type>`',
+    '`//hiddenpower <HP IV>, <ATK IV>, <DEF IV>, <SPA IV>, <SPD IV>,<SPE IV>` - `/hiddenpower from-stats hp:<HP IV> atk:<ATK IV> def:<DEF IV> spa:<SPA IV> spd:<SPD IV> spe:<SPE IV>`',
+  ].join('\n'),
   process: async function(msg, flags, dex) {
     if (dex.gen === 1) {
       return 'Hidden Power did not exist in gen1';

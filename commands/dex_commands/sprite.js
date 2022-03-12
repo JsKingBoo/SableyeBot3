@@ -35,6 +35,7 @@ module.exports = {
     desc: "Enables April Fool's Day sprites."
   }],
   hasCustomFormatting: true,
+  upgrade: '`//sprite <Pokemon name>` - `/sprite pokemon:<Pokemon name>`',
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return "```PokemonShowdown's sprite directory:``` https://play.pokemonshowdown.com/sprites/";

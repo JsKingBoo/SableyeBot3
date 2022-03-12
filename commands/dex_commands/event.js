@@ -6,6 +6,7 @@ module.exports = {
   usage: "<Pokemon name>, [event ID]",
   aliases: ['events'],
   options: [],
+  upgrade: '`//event <Pokemon name>[, event ID]` - `/event name: <Pokemon name> [event: <event ID>]`',
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;
