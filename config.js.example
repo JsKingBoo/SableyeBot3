@@ -4,9 +4,7 @@ module.exports.token = '';
 module.exports.admins = [130830896495329280];
 module.exports.elevated = [];
 
-module.exports.dexCommandPrefix = "//";
-module.exports.botCommandPrefix = "//";
-module.exports.fcCommandPrefix = "//";
+module.exports.prefix = "//";
 module.exports.helpCommand = "help";
 module.exports.flagPrefix = "--";
 module.exports.forcePM = 1500;
@@ -25,7 +23,7 @@ module.exports.fcData = './fc.json';
 module.exports.avatar = 'avatar.png';
 module.exports.defaultPresence = {
   'status': 'online',
-  'game': `${module.exports.dexCommandPrefix}${module.exports.helpCommand}`
+  'game': `with Slash Commands!`
 };
 
 module.exports.defaultGen = 8;

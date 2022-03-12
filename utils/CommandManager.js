@@ -23,9 +23,9 @@ class CommandManager {
 
   async init() {
     await Promise.all([
-      this.loadDirectory(BOT_CMD_DIR, Commands.BotCommand, config.botCommandPrefix),
-      this.loadDirectory(DEX_CMD_DIR, Commands.DexCommand, config.dexCommandPrefix),
-      this.loadDirectory(FC_CMD_DIR, Commands.FCCommand, config.fcCommandPrefix),
+      this.loadDirectory(BOT_CMD_DIR, Commands.BotCommand, config.prefix),
+      this.loadDirectory(DEX_CMD_DIR, Commands.DexCommand, config.prefix),
+      this.loadDirectory(FC_CMD_DIR, Commands.FCCommand, config.prefix),
     ]);
   }
 
@@ -61,7 +61,7 @@ class CommandManager {
     let isElevated = config.elevated.includes(parseInt(author.id));
     let isAdmin = config.admins.includes(parseInt(author.id));
 
-    if (cmd === `${config.dexCommandPrefix}${config.helpCommand}` || cmd === `${config.botCommandPrefix}${config.helpCommand}`) {
+    if (cmd === `${config.prefix}${config.helpCommand}`) {
       let usedPrefix = cmd.slice(0, -1 * config.helpCommand.length);
       for (let i = 0; i < this.commands.length; i++){
         let command = this.commands[i];
