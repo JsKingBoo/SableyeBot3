@@ -69,13 +69,12 @@ async function resolveMessage(msg) {
 
   if(warnSlashCommands) {
     const desc = [
-      'Message commands will be deprecated on the 30th of April 2022.',
-      'Click on the link above for more details',
+      'Sableye Bot will stop responding to Message Commands on the 30th of April 2022.  Click on the link above for more details',
     ];
     if(msg.guild) {
       try {
         await msg.guild.commands.fetch();
-        desc.push('Type one `/` in the chatbox to browse the available slash commands!');
+        desc.push('Fortunately, Sableye Bot\'s slash commands are already available! Type one `/` in the chatbox to browse the available slash commands.');
         fields.unshift({
           name: 'Upgrade',
           value: cm.getUpgrade(cmd),
@@ -99,7 +98,7 @@ async function resolveMessage(msg) {
     }
     newEmbeds.push({
       title: 'Sableye Bot now uses Slash Commands!',
-      description: desc.join('\n\n'),
+      description: desc.join('\n'),
       url: "https://sableye-bot.xyz/migration",
       color: 0x5F32AB,
       fields,
