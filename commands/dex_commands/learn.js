@@ -41,8 +41,8 @@ module.exports = {
       desc: "Consider the entire National Pokedex. Only applicable for //learn <move name>."
     }],
   upgrade: [
-    '`//learn <Pokemon name>` - `/learn name:<Pokemon name>`',
-    '`//learn <Pokemon name>, <move name>[, <move name>...]` - `/learn name:<Pokemon name> moves:<move name>[, <move name>...]`',
+    '`//learn <Pokemon name>` - `/learn pokemon:<Pokemon name>`',
+    '`//learn <Pokemon name>, <move name>[, <move name>...]` - `/learn pokemon:<Pokemon name> moves:<move name>[, <move name>...]`',
     '`//learn <move name>` - `/filter moves:<move name>`',
   ].join('\n'),
   process: async function(msg, flags, dex) {
