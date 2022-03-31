@@ -69,8 +69,8 @@ async function resolveMessage(msg) {
 
   if(warnSlashCommands) {
     const desc = [
-      'Message Content commands like the one you just used will no longer work on the 30th of April 2022.',
-      'After that date, Sableye Bot will only respond to Slash Commands.'
+      'On the 30th of April 2022, commands starting with `//` like the one you just used will stop working.',
+      'Slash commands will be the only way to send the bot commands from that date onwards.'
     ];
     if(msg.guild) {
       try {
@@ -98,10 +98,10 @@ async function resolveMessage(msg) {
       desc.push('Type one `/` in the chatbox to browse the available slash commands!');
     }
     newEmbeds.push({
-      title: 'Sableye Bot now uses Slash Commands!',
+      title: 'End of support for Message Content Commands',
       description: desc.join('\n'),
       url: "https://sableye-bot.xyz/migration",
-      color: 0xFEE722,
+      color: 0xFF0000,
       fields,
       footer: {
         text: `SableyeBot version 4.x`,
