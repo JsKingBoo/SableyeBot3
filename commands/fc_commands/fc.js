@@ -4,6 +4,7 @@ module.exports = {
   desc: "Get friend code information of a user.",
   longDesc: "Retrieve friend code information of a user along with a list of the games they own. If no Discord ID is provided, your information will be displayed. Discord ID is retrievable by enabling Developer Mode via Settings → Appearance → Advanced → Developer Mode. Once Developer Mode is activated, you can right click any user and select the \"Copy ID\" function to obtain another user's Discord ID.",
   usage: '[Discord ID]',
+  upgrade: '`//fc <User mention or ID>` - `/linkcode user:<User mention or ID>` (Generates a linking code instead of retrieving Friend Code info)',
   process: async function(msg, flags, author, fcm, queryUser) {
     let queryId = queryUser ? queryUser.id : ((msg[0].length === 0 ? author.id : msg[0])+'').replace(/\D/g, '').trim();
     let userName = queryUser ? `@${queryUser.tag}` : queryId;
