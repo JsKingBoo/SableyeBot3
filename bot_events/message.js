@@ -69,7 +69,7 @@ async function resolveMessage(msg) {
 
   if(warnSlashCommands) {
     const desc = [
-      'Message Content Commands will stop working on the 31st of August 2022.',
+      'Starting on the 31st of August 2022, Sableye Bot weill only respond to Slash Commands.',
       'Click on the link above for more details.',
       'Type one `/` in the chatbox to browse the available slash commands.'
     ];
@@ -81,7 +81,7 @@ async function resolveMessage(msg) {
       title: 'Migration to Slash Commands',
       description: desc.join('\n'),
       url: "https://sableye-bot.xyz/migration",
-      color: 0x5F32AB,
+      color: 0xFF0000,
       fields,
       footer: {
         text: `SableyeBot version 4.x`,
