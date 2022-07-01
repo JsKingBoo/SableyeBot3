@@ -3,7 +3,7 @@
 const discordjs = require('discord.js');
 const path = require('path');
 
-global.config = require('./config.js');
+global.config = require(process.env.CONFIG_FILE ?? './config.js');
 global.packagejson = require('./package.json');
 
 const BOT_EVENTS_DIR = path.resolve(__dirname, 'bot_events');
