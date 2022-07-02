@@ -20,6 +20,8 @@ module.exports.messageOptions = {
 
 module.exports.logsData = './storage.json';
 module.exports.fcData = './fc.json';
+module.exports.commandSummary = './commands.txt';
+module.exports.serverList = './servers.txt';
 module.exports.avatar = 'avatar.png';
 module.exports.defaultPresence = {
   'status': 'online',

@@ -23,13 +23,8 @@ module.exports = {
         guildList.push(`[${server.id}] ${server.name} ${joinedAt.getUTCFullYear()}-${joinedAt.getUTCMonth()+1}-${joinedAt.getUTCDate()}`);
       });
     }
-    fs.writeFileSync('logs/servers.txt', guildList.join('\n'));
+    fs.writeFileSync(config.serverList, guildList.join('\n'));
     return sendMsg;
   }
 };
-
-
-
-
-
 

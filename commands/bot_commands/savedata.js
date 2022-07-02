@@ -51,7 +51,7 @@ module.exports = {
       }
     }
 
-    fs.writeFileSync('logs/commandLog.txt', sendMsg.join('\n'));
+    fs.writeFileSync(config.commandSummary, sendMsg.join('\n'));
     
     if (sendMsg.length === 0) {
       return "Command either does not exist or not used yet";
