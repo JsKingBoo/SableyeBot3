@@ -15,6 +15,13 @@ global.bot = new discordjs.Client({
     discordjs.Intents.FLAGS.GUILDS,
     discordjs.Intents.FLAGS.DIRECT_MESSAGES,
   ],
+  makeCache: discordjs.Options.cacheWithLimits({
+    MessageManager: 50,
+    GuildMemberManager: 0,
+    PresenceManager: 0,
+    BaseGuildEmojiManager: 0,
+    UserManager: 0,
+  }),
   partials: [
     'CHANNEL',
   ],
