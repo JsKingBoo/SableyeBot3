@@ -16,7 +16,7 @@ global.bot = new discordjs.Client({
     discordjs.Intents.FLAGS.DIRECT_MESSAGES,
   ],
   makeCache: discordjs.Options.cacheWithLimits({
-    MessageManager: 50,
+    MessageManager: 0,
     GuildMemberManager: 0,
     PresenceManager: 0,
     BaseGuildEmojiManager: 0,
