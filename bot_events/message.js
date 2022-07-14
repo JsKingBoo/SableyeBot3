@@ -69,7 +69,7 @@ async function resolveMessage(msg) {
 
   if(warnSlashCommands) {
     const desc = [
-      'Starting on the 31st of August 2022, Sableye Bot weill only respond to Slash Commands.',
+      'Starting on the 14th of August 2022, Sableye Bot will only respond to Slash Commands.',
       'Click on the link above for more details.',
       'Type one `/` in the chatbox to browse the available slash commands.'
     ];
