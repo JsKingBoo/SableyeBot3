@@ -25,7 +25,7 @@ module.exports = {
     value: false,
     desc: "Gives additional information, if applicable."
   }],
-  upgrade: '`//dt <name>` - `/dt name:<name>`',
+  upgrade: '`//data <name>` - `/data name:<name>`',
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;
