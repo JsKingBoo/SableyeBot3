@@ -71,12 +71,36 @@ async function resolveMessage(msg) {
     const desc = [
       'Starting on the 14th of August 2022, Sableye Bot will only respond to Slash Commands.',
       'Click on the link above for more details.',
-      'Type one `/` in the chatbox to browse the available slash commands.'
     ];
-    fields.unshift({
-      name: 'Upgrade',
-      value: cm.getUpgrade(cmd),
-    });
+    if(msg.guild) {
+      try {
+        await msg.guild.commands.fetch();
+        desc.push('Type one `/` in the chatbox to browse the available slash commands.');
+        fields.unshift({
+          name: 'Upgrade',
+          value: cm.getUpgrade(cmd),
+        });
+      } catch (e) {
+        desc.push('Have a moderator click the button below to enable slash commands in this server.');
+        components.push({
+          type: 1,
+          components: [
+            {
+              type: 2,
+              style: 5,
+              label: 'Enable Slash Commands',
+              url: 'https://discord.com/api/oauth2/authorize?client_id=211522070620667905&permissions=0&scope=bot%20applications.commands',
+            }
+          ],
+        });
+      }
+    } else {
+      desc.push('Type one `/` in the chatbox to browse the available slash commands.');
+      fields.unshift({
+        name: 'Upgrade',
+        value: cm.getUpgrade(cmd),
+      });
+    }
     newEmbeds.push({
       title: 'Migration to Slash Commands',
       description: desc.join('\n'),
