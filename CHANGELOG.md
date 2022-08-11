@@ -1,3 +1,45 @@
+### 3.1.29-FINAL 2022-08-11
+
+ * Remove nag code entirely
+ * Mothball repo
+
+### interim 2022-07-18
+
+ * Disable most caching for stability
+ * Update discord.js to v13.9.0
+
+### interim 2022-07-02
+
+ * Set the locations of saved data in the config file.
+
+### interim 2022-07-01
+
+ * Set the config file's location in the `CONFIG_FILE` environment variable.
+
+### interim 2022-06-06
+
+ * Update discord.js to v13.8.0
+   * This makes the bot actually respond in Text-in-Voice cahnnels.
+
+### interim 2022-06-02
+
+ * Update discord.js to v13.7.0
+   * This fixed SableyeBot crashing when used in a Text-in-Voice channel, though the bot could not be used in such channels.
+
+### interim 2022-03-26
+
+ * Update discord.js to v13.6.0
+
+### interim 2022-03-07
+
+ * Fix `//setgame` 
+ * Fix `//sprite` failing to embed the sprite when the deprecation notice was shown
+
+### 3.1.28 - 2022-02-05
+
+ * Add Hsui Pokémon
+ * Add nag code
+
 ### 3.1.27 - 2022-02-02
 
  * Add Privacy Policy to `//about`
