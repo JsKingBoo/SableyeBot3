@@ -12,7 +12,6 @@ module.exports = {
     value: false,
     desc: "Gives additional information such as target, generation, singles viability, and contest type."
   }],
-  upgrade: '`//move <move name>` - `/dt name: <move name>`',
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;

@@ -11,8 +11,6 @@ module.exports.forcePM = 1500;
 module.exports.maxMsgLength = 1950;
 module.exports.maxPMs = 10;
 
-module.exports.upgradeChance = 1 / 4;
-
 module.exports.messageOptions = {
   tts: false,
   disableEveryone: true

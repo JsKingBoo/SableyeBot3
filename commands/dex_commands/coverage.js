@@ -34,11 +34,6 @@ module.exports = {
     value: false,
     desc: "Invert the type chart."
   }],
-  upgrade: [
-    '`//coverage <Pokemon name>` - `/coverage pokemon:<Pokemon name>`',
-    '`//coverage <type>[, <type>...]` - `/coverage types:<type>[, <type>]`',
-    '`//coverage <Pokemon name>, <type>[, <type>...]` - `/coverage pokemon:<Pokemon name> types:<type>[, <type>]	`',
-  ].join('\n'),
   process: async function(msg, flags, dex) {
     if (msg.length === 0){
       return null;
