@@ -1,3 +1,5 @@
+# SableyeBot3 is no longer receiving updates.  [The new, actively maintained repo can be found here](https://github.com/Stalruth/SableyeBot4)
+
 # ![logo](assets/avatar.png "logo") 
 # SableyeBot
 ### Competitive Pokemon Discord bot
